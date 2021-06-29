@@ -1,0 +1,54 @@
+
+plugins {
+    id 'java-library'
+}
+
+group 'edu.depaul'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def junitVersion = '5.7.1'
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+//TODO: change to your userid, such as  DWALKE30
+def user = 'demo'
+
+task packageDistribution(type: Zip) {
+    dependsOn check
+    archiveFileName = "${user}-${rootProject.name}.zip"
+    destinationDirectory = file("$buildDir/dist")
+
+    from("$projectDir") {
+        include "src/**/*"
+        include "build.gradle"
+        include "gradlew"
+        include "gradlew.bat"
+        include "settings.gradle"
+    }
+
+    into("${rootProject.name}")
+}
+
+test {
+    useJUnitPlatform()
+    afterTest { desc, result ->
+        logger.quiet "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
+
+check {
+    finalizedBy packageDistribution
+}
+
