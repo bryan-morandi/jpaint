@@ -1,6 +1,4 @@
-package controller;
-
-import controller.IUndoable;
+package controller.commands;
 
 import java.util.Stack;
 
@@ -32,4 +30,5 @@ public class CommandHistory {
         }
         return result;
     }
+
 }

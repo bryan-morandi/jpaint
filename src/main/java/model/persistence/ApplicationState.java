@@ -71,9 +71,8 @@ public class ApplicationState implements IApplicationState {
     }
 
     @Override
-    public MouseMode getActiveMouseMode() {
-        return activeMouseMode;
-    }
+    public MouseMode getActiveMouseMode() { return activeMouseMode; }
+
 
     private void setDefaults() {
         activeShapeType = ShapeType.RECTANGLE;
