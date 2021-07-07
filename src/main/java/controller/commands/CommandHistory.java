@@ -1,5 +1,7 @@
 package controller.commands;
 
+import controller.commands.interfaces.IUndoable;
+
 import java.util.Stack;
 
 public class CommandHistory {

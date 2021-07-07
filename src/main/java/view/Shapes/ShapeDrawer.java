@@ -1,20 +1,28 @@
 package view.Shapes;
 
-import view.Shapes.IShape;
-import view.Shapes.ShapeList;
+import view.interfaces.IShape;
 
 import java.awt.*;
 
 public class ShapeDrawer {
-    private ShapeList shapeList;
+    private final Graphics2D g2D;
 
-    public ShapeDrawer(ShapeList shapeList) {
-        this.shapeList = shapeList;
+    public ShapeDrawer(Graphics2D g2D) {
+        this.g2D = g2D;
     }
-    public void draw(Graphics2D g) {
-        for (IShape shape : shapeList.getShapeList()) {
-            g.setColor(shape.getPrimaryColor());
-            g.fillRect(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
+
+    public void draw() {
+        for ( IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
+            switch (shape.getShapeType()) {
+                case RECTANGLE:
+                    g2D.setColor(shape.getPrimaryColor());
+                    g2D.fillRect(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
+                    break;
+                case TRIANGLE:
+                case ELLIPSE:
+                System.out.println("Shape not yet implemented");
+                    break;
+            }
         }
     }
 

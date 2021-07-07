@@ -1,5 +1,6 @@
-package view.Shapes;
+package view.interfaces;
 
+import model.ShapeShadingType;
 import model.ShapeType;
 
 import java.awt.*;
@@ -12,6 +13,10 @@ public interface IShape {
     int getY();
     int getWidth();
     int getHeight();
+    Point getReleasedPoint();
+    Point getPressedPoint();
     Color getPrimaryColor();
+    Color getSecondaryColor();
     ShapeType getShapeType();
+    ShapeShadingType getShadingType();
 }

@@ -1,6 +1,6 @@
 package view.gui;
 
-import view.Shapes.IShape;
+import view.interfaces.IShape;
 import view.Shapes.MasterShapeList;
 import view.interfaces.PaintCanvasBase;
 

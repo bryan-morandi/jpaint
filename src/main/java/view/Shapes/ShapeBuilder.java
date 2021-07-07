@@ -7,127 +7,86 @@ import java.awt.*;
 
 //builder method to build shapes
 
-public class ShapeBuilder implements IShape {
+public class ShapeBuilder {
     private Point pressedPoint, releasedPoint;
     private ShapeType shapeType;
     private ShapeShadingType shadingType;
-    private Color primaryColor;
+    private Color primaryColor, secondaryColor;
     private int X, Y, width, height;
 
 
-
-public ShapeBuilder(Point pressedPoint, Point releasedPoint) {
+    public ShapeBuilder(Point pressedPoint, Point releasedPoint) {
     this.pressedPoint = pressedPoint;
     this.releasedPoint = releasedPoint;
-
     getCoordinates();
+    }
 
-}
+    //getters
+    public int getX() { return X;}
 
+    public int getY() { return Y;}
+
+    public int getHeight() { return height;}
+
+    public int getWidth() { return width;}
+
+    public ShapeShadingType getShadingType() { return shadingType; }
+
+    public ShapeType getShapeType() { return shapeType; }
+
+    public Point getPressedPoint() { return pressedPoint; }
+
+    public Point getReleasedPoint() { return releasedPoint; }
+
+    public  Color getPrimaryColor() { return primaryColor; }
+
+    public  Color getSecondaryColorColor() { return secondaryColor; }
+
+
+    //setters
     public void getCoordinates() {
         this.X = Math.min(pressedPoint.x, releasedPoint.x);
         this.Y = Math.min(pressedPoint.y, releasedPoint.y);
         this.width = Math.max(pressedPoint.x, releasedPoint.x) - X;
         this.height = Math.max(pressedPoint.y, releasedPoint.y) - Y;
     }
-    @Override
-    public ShapeType getShapeType() {
-        return shapeType;
-    }
 
-    public ShapeBuilder setShapeType(ShapeType shapeType) {
-        this.shapeType = shapeType;
+    public ShapeBuilder shapeType(ShapeType shapetype) {
+        this.shapeType = shapetype;
         return this;
     }
 
-    public ShapeShadingType getShadingType() {
-        return shadingType;
-    }
-
-    public ShapeBuilder setShadingType(ShapeShadingType shadingType) {
-        this.shadingType = shadingType;
+    public ShapeBuilder shadingType(ShapeShadingType shapeShadingType) {
+        this.shadingType = shapeShadingType;
         return this;
     }
 
-    public Point getPressedPoint() {
-        return pressedPoint;
-    }
-    @Override
-    public Color getPrimaryColor() {
-        return primaryColor;
-    }
-
-    public ShapeBuilder setPrimaryColor(Color primaryColor){
-        this.primaryColor = primaryColor;
+    public ShapeBuilder pressedPoint(Point pPoint) {
+        this.pressedPoint = pPoint;
         return this;
     }
 
-    public ShapeBuilder setPressedPoint(Point pressedPoint) {
-        this.pressedPoint = pressedPoint;
+    public ShapeBuilder releasedPoint(Point rPoint) {
+        this.releasedPoint = rPoint;
         return this;
     }
 
-    public Point getReleasedPoint() {
-        return releasedPoint;
-    }
-
-    public ShapeBuilder setReleasedPoint(Point releasedPoint) {
-        this.releasedPoint = releasedPoint;
+    public ShapeBuilder primaryColor(Color pColor) {
+        this.primaryColor = pColor;
         return this;
     }
-    @Override
-    public int getX() {
-        return X;
-    }
 
-    public ShapeBuilder setX(int X) {
-        this.X = X;
+    public ShapeBuilder secondaryColor(Color sColor) {
+        this.secondaryColor = sColor;
         return this;
     }
-    @Override
-    public int getY() {
-        return Y;
-    }
 
-    public ShapeBuilder setY(int Y) {
-        this.Y = Y;
-        return this;
-    }
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    public ShapeBuilder setWidth(int width) {
-        this.width = width;
-        return this;
-    }
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    public int setHeight(int height) {
-    this.height = height;
-    return height;
-    }
-    @Override
-    public void add(){
-        MasterShapeList.masterShapeList.add(this);
-    }
-    @Override
-    public void remove() {
-        MasterShapeList.masterShapeList.remove(this);
-    }
-
-    @Override
-    public void draw(Graphics2D g) {
-        for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
-            g.setColor(shape.getPrimaryColor());
-            g.fillRect(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
-        }
+    //builder method
+    public Shape buildShape() {
+        return new Shape (this);
     }
 
 }
+
 
 

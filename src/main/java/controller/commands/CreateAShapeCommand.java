@@ -1,58 +1,45 @@
 package controller.commands;
 
+import controller.commands.interfaces.ICommand;
+import controller.commands.interfaces.IUndoable;
 import model.persistence.ApplicationState;
 import view.Shapes.*;
+import view.Shapes.Shape;
 import view.gui.PaintCanvas;
 
 import java.awt.*;
 
 public class CreateAShapeCommand implements ICommand, IUndoable {
     private final PaintCanvas paintCanvas;
-
-    private final ShapeBuilder shapeBuilder;
-
-    private IShape shape;
+    private final Shape shape;
 
     public CreateAShapeCommand(Point pressedPoint, Point releasedPoint, PaintCanvas paintCanvas, ApplicationState appState) {
         this.paintCanvas = paintCanvas;
 
-
-        this.shapeBuilder = new ShapeBuilder(pressedPoint, releasedPoint);
-        // builder automatically finds X, Y, height, width
-        shapeBuilder
-                .setPrimaryColor(appState.getActivePrimaryColor().getColor())
-                .setShapeType(appState.getActiveShapeType())
-                .setShadingType(appState.getActiveShapeShadingType());
-        System.out.println("X: " + shapeBuilder.getX() + ", Y: " + shapeBuilder.getY() + ", W: " + shapeBuilder.getWidth() + ", H: " + shapeBuilder.getHeight());
-
+        /* builder automatically sets (X, Y, height, width) from
+         pressedPoint and releasedPoint*/
+        shape = new ShapeBuilder(pressedPoint, releasedPoint)
+                .primaryColor(appState.getActivePrimaryColor().getColor())
+                .secondaryColor(appState.getActiveSecondaryColor().getColor())
+                .shapeType(appState.getActiveShapeType())
+                .shadingType(appState.getActiveShapeShadingType())
+                .buildShape();
     }
 
     @Override
     public void run() {
-        shape = shapeBuilder;
-        switch (shape.getShapeType()) {
-            case RECTANGLE:
-                shape.add(); //adds shape to MasterShapeList
-                shape.draw(paintCanvas.getGraphics2D());
-                CommandHistory.add(this);
-                System.out.println(MasterShapeList.masterShapeList.size());
-                break;
-            case TRIANGLE:
-                System.out.println("Triangle not implemented yet");
-                break;
-            case ELLIPSE:
-                System.out.println("Ellipse not implemented yet");
-                break;
-            default: System.out.println("Not a shape");
-        }
-
+        shape.add();
+        paintCanvas.repaint();
+        CommandHistory.add(this);
+        /*note because we have not implemented Triangle/Ellipses yet, choosing
+        them to draw will mess up the CommandHistory print statements*/
     }
 
     @Override
     public void undo() {
         shape.remove();
         paintCanvas.repaint();
-        System.out.println("Undo\n" + MasterShapeList.masterShapeList.size());
+        System.out.println("Undo");
 
         }
 
@@ -60,7 +47,7 @@ public class CreateAShapeCommand implements ICommand, IUndoable {
     public void redo() {
         shape.add();
         paintCanvas.repaint();
-        System.out.println("Redo\n" + MasterShapeList.masterShapeList.size());
+        System.out.println("Redo");
 
     }
 }

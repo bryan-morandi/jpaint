@@ -33,7 +33,15 @@ public class MouseClickTracker extends MouseAdapter {
         releasedPoint = e.getPoint();
         System.out.println("Released X: " + releasedPoint.x + ", Released Y: " + releasedPoint.y);
 
-        CreateAShapeCommand newShape = new CreateAShapeCommand(pressedPoint, releasedPoint, paintCanvas, appState);
-        newShape.run();
+        switch (appState.getActiveMouseMode()) {
+            case DRAW:
+                CreateAShapeCommand newShape = new CreateAShapeCommand(pressedPoint, releasedPoint, paintCanvas, appState);
+                newShape.run();
+                break;
+            case MOVE:
+            case SELECT:
+                System.out.println("Mouse mode not yet implemented");
+                break;
+        }
     }
 }
