@@ -61,15 +61,15 @@ public class ShapeBuilder {
         return this;
     }
 
-    public ShapeBuilder pressedPoint(Point pPoint) {
-        this.pressedPoint = pPoint;
-        return this;
-    }
-
-    public ShapeBuilder releasedPoint(Point rPoint) {
-        this.releasedPoint = rPoint;
-        return this;
-    }
+//    public ShapeBuilder pressedPoint(Point pPoint) {
+//        this.pressedPoint = pPoint;
+//        return this;
+//    }
+//
+//    public ShapeBuilder releasedPoint(Point rPoint) {
+//        this.releasedPoint = rPoint;
+//        return this;
+//    }
 
     public ShapeBuilder primaryColor(Color pColor) {
         this.primaryColor = pColor;

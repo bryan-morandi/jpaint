@@ -20,10 +20,6 @@ public class ShapeList {
         System.out.println("removing shape\n" + MasterShapeList.masterShapeList.size());
     }
 
-    public IShape get(int index) {
-        return shapeList.get(index);
-    }
-
     public int size() {
         return shapeList.size();
     }
@@ -31,6 +27,10 @@ public class ShapeList {
     public ArrayList<IShape> getShapeList() {
         return shapeList;
     }
+
+    //    public IShape get(int index) {
+//        return shapeList.get(index);
+//    }
 
     }
 
