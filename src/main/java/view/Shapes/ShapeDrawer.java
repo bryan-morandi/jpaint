@@ -44,8 +44,7 @@ public class ShapeDrawer {
                         yPoints = new int[] { shape.getReleasedPoint().y, shape.getPressedPoint().y, shape.getPressedPoint().y  };
                     }
                     //equilateral triangle pointing east/west depending on pressed and released point
-                    else /*(shape.getX() > shape.getReleasedPoint().x && shape.getY() > shape.getReleasedPoint().getY() ||
-                            shape.getX() < shape.getReleasedPoint().x && shape.getY() > shape.getReleasedPoint().getY())*/ {
+                    else {
                         xPoints = new int[] {shape.getPressedPoint().x, shape.getReleasedPoint().x, shape.getReleasedPoint().x  };
                         yPoints = new int[] {(shape.getPressedPoint().y + shape.getReleasedPoint().y) / 2, shape.getPressedPoint().y, shape.getReleasedPoint().y  };
                         }
