@@ -28,6 +28,7 @@ public class CreateAShapeCommand implements ICommand, IUndoable {
 
     @Override
     public void run() {
+        System.out.println("X" + shape.getX() + " Y" + shape.getY() + " W" + shape.getWidth() + " H" + shape.getHeight());
         shape.add();
         paintCanvas.repaint();
         CommandHistory.add(this);
