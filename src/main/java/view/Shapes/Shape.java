@@ -2,6 +2,7 @@ package view.Shapes;
 
 import model.ShapeShadingType;
 import model.ShapeType;
+import view.interfaces.IBoundingBox;
 import view.interfaces.IShape;
 
 import java.awt.*;
@@ -12,6 +13,7 @@ public class Shape implements IShape {
     private final ShapeShadingType shadingType;
     private final Color primaryColor, secondaryColor;
     private final int X, Y, width, height;
+    private boolean selected;
 
     public Shape (ShapeBuilder builder) {
         this.pressedPoint = builder.getPressedPoint();
@@ -24,6 +26,7 @@ public class Shape implements IShape {
         this.Y = builder.getY();
         this.width = builder.getWidth();
         this.height = builder.getHeight();
+        this.selected = false;
     }
     @Override
     public int getX() {
@@ -89,5 +92,13 @@ public class Shape implements IShape {
     public void draw(Graphics2D g2D) {
         ShapeDrawer shapeDrawer = new ShapeDrawer(g2D);
         shapeDrawer.draw();
+    }
+    @Override
+    public void setSelected(boolean selectedStatus) {
+        this.selected = selectedStatus;
+    }
+    @Override
+    public boolean getSelected() {
+        return this.selected;
     }
 }

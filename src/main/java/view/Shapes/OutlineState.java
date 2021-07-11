@@ -19,6 +19,7 @@ public class OutlineState implements IShadingState {
     @Override
     public void drawWithSelectedShadingType() {
         g2D.setColor(shape.getPrimaryColor());
+        g2D.setStroke(new BasicStroke(5));
         g2D.draw(shapeToBeDrawn);
     }
 }

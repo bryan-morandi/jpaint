@@ -7,6 +7,8 @@ import java.awt.*;
 
 public interface IShape {
     void draw(Graphics2D g);
+    void setSelected(boolean selectedStatus);
+    boolean getSelected();
     void add();
     void remove();
     int getX();

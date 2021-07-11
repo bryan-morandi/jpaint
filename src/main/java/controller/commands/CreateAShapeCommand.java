@@ -32,8 +32,6 @@ public class CreateAShapeCommand implements ICommand, IUndoable {
         shape.add();
         paintCanvas.repaint();
         CommandHistory.add(this);
-        /*note because we have not implemented Triangle/Ellipses yet, choosing
-        them to draw will mess up the CommandHistory print statements*/
     }
 
     @Override

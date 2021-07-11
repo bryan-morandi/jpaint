@@ -1,5 +1,7 @@
 package controller;
 
+import controller.commands.MoveCommand;
+import controller.commands.SelectCommand;
 import model.persistence.ApplicationState;
 import view.gui.PaintCanvas;
 import controller.commands.CreateAShapeCommand;
@@ -38,8 +40,11 @@ public class MouseClickTracker extends MouseAdapter {
                 CreateAShapeCommand newShape = new CreateAShapeCommand(pressedPoint, releasedPoint, paintCanvas, appState);
                 newShape.run();
                 break;
-            case MOVE:
             case SELECT:
+                SelectCommand selectShape = new SelectCommand(pressedPoint, releasedPoint, paintCanvas);
+                selectShape.run();
+                break;
+            case MOVE:
                 System.out.println("Mouse mode not yet implemented");
                 break;
         }
