@@ -2,7 +2,6 @@ package view.Shapes;
 
 import model.ShapeShadingType;
 import model.ShapeType;
-import view.interfaces.IBoundingBox;
 import view.interfaces.IShape;
 
 import java.awt.*;
@@ -12,22 +11,28 @@ public class Shape implements IShape {
     private final ShapeType shapeType;
     private final ShapeShadingType shadingType;
     private final Color primaryColor, secondaryColor;
-    private final int X, Y, width, height;
+    private int X, Y, width, height;
     private boolean selected;
 
-    public Shape (ShapeBuilder builder) {
-        this.pressedPoint = builder.getPressedPoint();
-        this.releasedPoint = builder.getReleasedPoint();
-        this.shapeType = builder.getShapeType();
-        this.shadingType = builder.getShadingType();
-        this.primaryColor = builder.getPrimaryColor();
-        this.secondaryColor = builder.getSecondaryColorColor();
-        this.X = builder.getX();
-        this.Y = builder.getY();
-        this.width = builder.getWidth();
-        this.height = builder.getHeight();
-        this.selected = false;
+    public Shape (Point pressedPoint, Point releasedPoint, ShapeType shapeType, ShapeShadingType shadingType,
+                  Color primaryColor, Color secondaryColor, boolean selected) {
+        this.pressedPoint = pressedPoint;
+        this.releasedPoint = releasedPoint;
+        this.shapeType = shapeType;
+        this.shadingType = shadingType;
+        this.primaryColor = primaryColor;
+        this.secondaryColor = secondaryColor;
+        this.selected = selected;
+        getCoordinates();
     }
+
+    public void getCoordinates() {
+        this.X = Math.min(pressedPoint.x, releasedPoint.x);
+        this.Y = Math.min(pressedPoint.y, releasedPoint.y);
+        this.width = Math.max(pressedPoint.x, releasedPoint.x) - X;
+        this.height = Math.max(pressedPoint.y, releasedPoint.y) - Y;
+    }
+
     @Override
     public int getX() {
         return X;
@@ -79,16 +84,6 @@ public class Shape implements IShape {
     }
 
     @Override
-    public void add(){
-        MasterShapeList.masterShapeList.add(this);
-    }
-
-    @Override
-    public void remove() {
-        MasterShapeList.masterShapeList.remove(this);
-    }
-
-    @Override
     public void draw(Graphics2D g2D) {
         ShapeDrawer shapeDrawer = new ShapeDrawer(g2D);
         shapeDrawer.draw();
@@ -101,4 +96,8 @@ public class Shape implements IShape {
     public boolean getSelected() {
         return this.selected;
     }
+    @Override
+    public void setX(int newX) { this.X = newX; }
+    @Override
+    public  void  setY(int newY) { this.Y = newY; }
 }

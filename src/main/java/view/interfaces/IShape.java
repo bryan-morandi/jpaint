@@ -9,8 +9,6 @@ public interface IShape {
     void draw(Graphics2D g);
     void setSelected(boolean selectedStatus);
     boolean getSelected();
-    void add();
-    void remove();
     int getX();
     int getY();
     int getWidth();
@@ -21,4 +19,6 @@ public interface IShape {
     Color getSecondaryColor();
     ShapeType getShapeType();
     ShapeShadingType getShadingType();
+    void setX(int newX);
+    void setY(int newY);
 }

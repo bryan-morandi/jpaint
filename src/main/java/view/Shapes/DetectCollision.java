@@ -4,8 +4,8 @@ import view.interfaces.IBoundingBox;
 import view.interfaces.IShape;
 
 public class DetectCollision {
-    private IBoundingBox mouseBox;
-    private IShape shapeBox;
+    private final IBoundingBox mouseBox;
+    private final IShape shapeBox;
 
     public DetectCollision(IBoundingBox MouseBox, IShape ShapeBox) {
         this.mouseBox = MouseBox;

@@ -12,44 +12,7 @@ public class ShapeBuilder {
     private ShapeType shapeType;
     private ShapeShadingType shadingType;
     private Color primaryColor, secondaryColor;
-    private int X, Y, width, height;
-
-
-    public ShapeBuilder(Point pressedPoint, Point releasedPoint) {
-    this.pressedPoint = pressedPoint;
-    this.releasedPoint = releasedPoint;
-    getCoordinates();
-    }
-
-    //getters
-    public int getX() { return X;}
-
-    public int getY() { return Y;}
-
-    public int getHeight() { return height;}
-
-    public int getWidth() { return width;}
-
-    public ShapeShadingType getShadingType() { return shadingType; }
-
-    public ShapeType getShapeType() { return shapeType; }
-
-    public Point getPressedPoint() { return pressedPoint; }
-
-    public Point getReleasedPoint() { return releasedPoint; }
-
-    public  Color getPrimaryColor() { return primaryColor; }
-
-    public  Color getSecondaryColorColor() { return secondaryColor; }
-
-
-    //setters
-    public void getCoordinates() {
-        this.X = Math.min(pressedPoint.x, releasedPoint.x);
-        this.Y = Math.min(pressedPoint.y, releasedPoint.y);
-        this.width = Math.max(pressedPoint.x, releasedPoint.x) - X;
-        this.height = Math.max(pressedPoint.y, releasedPoint.y) - Y;
-    }
+    private boolean selected;
 
     public ShapeBuilder shapeType(ShapeType shapetype) {
         this.shapeType = shapetype;
@@ -81,9 +44,15 @@ public class ShapeBuilder {
         return this;
     }
 
+    public ShapeBuilder selectedStatus(boolean status) {
+        this.selected = status;
+        return this;
+    }
+
     //builder method
     public Shape buildShape() {
-        return new Shape (this);
+        return new Shape (pressedPoint, releasedPoint, shapeType, shadingType, primaryColor,
+                secondaryColor, selected);
     }
 
 }

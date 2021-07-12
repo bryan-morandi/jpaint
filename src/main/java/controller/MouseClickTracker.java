@@ -45,7 +45,8 @@ public class MouseClickTracker extends MouseAdapter {
                 selectShape.run();
                 break;
             case MOVE:
-                System.out.println("Mouse mode not yet implemented");
+                MoveCommand moveShape = new MoveCommand(pressedPoint, releasedPoint, paintCanvas);
+                moveShape.run();
                 break;
         }
     }

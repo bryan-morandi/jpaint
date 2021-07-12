@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class SelectCommand implements ICommand {
     private final Point pressedPoint;
     private final Point releasedPoint;
-    private final PaintCanvas paintCanvas;
+    private final PaintCanvas paintCanvas; // may need paint canvas/g2D later to print dotted line around shapes
     private int selectedCount = 0;
 
     public  SelectCommand(Point PressedPoint, Point ReleasedPoint, PaintCanvas PaintCanvas) {
