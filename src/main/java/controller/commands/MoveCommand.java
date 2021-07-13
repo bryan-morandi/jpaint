@@ -48,6 +48,7 @@ public class MoveCommand implements ICommand, IUndoable {
         }
         CommandHistory.add(this);
         paintCanvas.repaint();
+        System.out.println("Shape(s) moved");
     }
 
     @Override

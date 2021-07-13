@@ -1,17 +1,17 @@
 package view.Shapes;
 
-import view.interfaces.IShadingState;
+import view.interfaces.IShadingStrategy;
 import view.interfaces.IShape;
 
 import java.awt.*;
 import java.awt.Shape;
 
-public class FilledInState implements IShadingState {
+public class FilledInStrategy implements IShadingStrategy {
     private final IShape shape;
     private final Shape shapeToBeDrawn;
     private final Graphics2D g2D;
 
-    public FilledInState(Shape ShapeToBeDrawn, IShape Shape, Graphics2D G2D) {
+    public FilledInStrategy(Shape ShapeToBeDrawn, IShape Shape, Graphics2D G2D) {
         this.shape = Shape;
         this.shapeToBeDrawn = ShapeToBeDrawn;
         this.g2D = G2D;

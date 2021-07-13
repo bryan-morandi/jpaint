@@ -9,7 +9,7 @@ import java.awt.*;
 public class Shape implements IShape {
     private final Point pressedPoint, releasedPoint;
     private final ShapeType shapeType;
-    private final ShapeShadingType shadingType;
+    private ShapeShadingType shadingType;
     private final Color primaryColor, secondaryColor;
     private int X, Y, width, height;
     private boolean selected;
@@ -100,4 +100,10 @@ public class Shape implements IShape {
     public void setX(int newX) { this.X = newX; }
     @Override
     public  void  setY(int newY) { this.Y = newY; }
+    @Override
+    public void setHeight(int newH) { this.height = newH; }
+    @Override
+    public  void  setWidth(int newW) { this.width = newW; }
+    @Override
+    public  void setShadingType(ShapeShadingType newShadeType) { this.shadingType = newShadeType; }
 }

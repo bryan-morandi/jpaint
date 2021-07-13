@@ -1,6 +1,6 @@
 package view.interfaces;
 
-public interface IShadingState {
+public interface IShadingStrategy {
 
     void drawWithSelectedShadingType();
 }

@@ -1,5 +1,6 @@
 package view.gui;
 
+import model.ShapeType;
 import view.interfaces.IShape;
 import view.Shapes.MasterShapeList;
 import view.interfaces.PaintCanvasBase;
