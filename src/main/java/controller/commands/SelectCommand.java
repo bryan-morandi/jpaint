@@ -25,9 +25,8 @@ public class SelectCommand implements ICommand {
     @Override
     public void run() {
         BoundingBox boundingBox = new BoundingBox(pressedPoint,releasedPoint);
-        ArrayList<IShape> shapeList = MasterShapeList.masterShapeList.getShapeList();
 
-        for (IShape shape : shapeList) {
+        for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
             DetectCollision detectCollision = new DetectCollision(boundingBox, shape);
             shape.setSelected(detectCollision.run());
             if (shape.getSelected()) {

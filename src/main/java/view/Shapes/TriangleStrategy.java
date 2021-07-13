@@ -21,18 +21,23 @@ public class TriangleStrategy implements IShapeStrategy {
         int[] yPoints;
         //equilateral triangle pointing north
         if (shape.getPressedPoint().x < shape.getReleasedPoint().x && shape.getPressedPoint().y < shape.getReleasedPoint().y ) {
-            xPoints = new int[] {(shape.getPressedPoint().x + shape.getReleasedPoint().x) / 2, shape.getPressedPoint().x, shape.getReleasedPoint().x };
-            yPoints = new int[] {shape.getPressedPoint().y , shape.getReleasedPoint().y, shape.getReleasedPoint().y  };
+            xPoints = new int[] {(shape.getX() + (shape.getX() + shape.getWidth())) / 2, shape.getX(), shape.getX() + shape.getWidth() };
+            yPoints = new int[] {shape.getY() , shape.getY() + shape.getHeight(), shape.getY() + shape.getHeight()  };
         }
         //equilateral triangle pointing south
         else if (shape.getPressedPoint().x > shape.getReleasedPoint().x && shape.getPressedPoint().y < shape.getReleasedPoint().y ) {
-            xPoints = new int[] {(shape.getPressedPoint().x + shape.getReleasedPoint().x) / 2, shape.getPressedPoint().x, shape.getReleasedPoint().x };
-            yPoints = new int[] { shape.getReleasedPoint().y, shape.getPressedPoint().y, shape.getPressedPoint().y  };
+            xPoints = new int[] {(shape.getX() + (shape.getX() + shape.getWidth())) / 2, shape.getX(), shape.getX() + shape.getWidth() };
+            yPoints = new int[] { shape.getY() + shape.getHeight(), shape.getY(), shape.getY()  };
         }
-        //equilateral triangle pointing east/west depending on pressed and released point
+        //equilateral triangle pointing west
+        else if (shape.getPressedPoint().x > shape.getReleasedPoint().x && shape.getPressedPoint().y > shape.getReleasedPoint().y ) {
+            xPoints = new int[] {shape.getX(), shape.getX() + shape.getWidth(), shape.getX() + shape.getWidth()  };
+            yPoints = new int[] {(shape.getY() + (shape.getY() + shape.getHeight())) / 2, shape.getY(), shape.getY() + shape.getHeight()  };
+        }
+        //equilateral triangle pointing east
         else {
-            xPoints = new int[] {shape.getPressedPoint().x, shape.getReleasedPoint().x, shape.getReleasedPoint().x  };
-            yPoints = new int[] {(shape.getPressedPoint().y + shape.getReleasedPoint().y) / 2, shape.getPressedPoint().y, shape.getReleasedPoint().y  };
+            xPoints = new int[] {shape.getX() + shape.getWidth(), shape.getX(), shape.getX()};
+            yPoints = new int[] {(shape.getY() + (shape.getY() + shape.getHeight())) / 2, shape.getY() + shape.getHeight(), shape.getY() };
         }
         triangle = new Polygon(xPoints, yPoints, nPoints);
         return triangle;

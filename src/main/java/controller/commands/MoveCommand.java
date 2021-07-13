@@ -3,6 +3,7 @@ package controller.commands;
 import controller.commands.interfaces.ICommand;
 import controller.commands.interfaces.IUndoable;
 import view.Shapes.MasterShapeList;
+import view.Shapes.ShapeList;
 import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
@@ -13,6 +14,7 @@ public class MoveCommand implements ICommand, IUndoable {
     private final Point releasedPoint;
     private final PaintCanvas paintCanvas;
     private int deltaX, deltaY;
+    private final ShapeList movedShapes = new ShapeList();
 
     public MoveCommand(Point PressedPoint, Point ReleasedPoint, PaintCanvas PaintCanvas) {
         this.pressedPoint = PressedPoint;
@@ -32,34 +34,33 @@ public class MoveCommand implements ICommand, IUndoable {
         return shape;
     }
 
-    public IShape redoMove(IShape shape) {
+    public void undoMove(IShape shape) {
         shape.setX(shape.getX() - deltaX);
         shape.setY(shape.getY() - deltaY);
-        return shape;
     }
 
     @Override
     public void run() {
         for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
             if (shape.getSelected()) {
-                MasterShapeList.movedShapeList.add(move(shape));
-                CommandHistory.add(this);
+                movedShapes.add(move(shape));
             }
         }
+        CommandHistory.add(this);
         paintCanvas.repaint();
     }
 
     @Override
     public void undo() {
-        for (IShape shape : MasterShapeList.movedShapeList.getShapeList()) {
-            MasterShapeList.movedShapeList.add(redoMove(shape));
+        for (IShape shape : movedShapes.getShapeList()) {
+            undoMove(shape);
         }
         paintCanvas.repaint();
     }
 
     @Override
     public void redo() {
-        for (IShape shape : MasterShapeList.movedShapeList.getShapeList()) {
+        for (IShape shape : movedShapes.getShapeList()) {
             move(shape);
         }
         paintCanvas.repaint();

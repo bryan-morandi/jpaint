@@ -6,6 +6,7 @@ import model.persistence.ApplicationState;
 import view.Shapes.*;
 import view.Shapes.Shape;
 import view.gui.PaintCanvas;
+import view.interfaces.IShape;
 
 import java.awt.*;
 
@@ -37,6 +38,11 @@ public class CreateAShapeCommand implements ICommand, IUndoable {
         MasterShapeList.masterShapeList.add(shape);
         paintCanvas.repaint();
         CommandHistory.add(this);
+
+        //only upon mouse click will the selected status of the MasterShapeList reset
+        for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
+            shape.setSelected(false);
+        }
     }
 
     @Override
