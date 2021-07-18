@@ -9,6 +9,8 @@ import java.awt.Shape;
 
 public class ShapeDrawer {
     private final Graphics2D g2D;
+    private IShapeStrategy shapeStrategy;
+    private IShadingStrategy shadingStrategy;
     private Shape shapeToBeDrawn;
 
     public ShapeDrawer(Graphics2D g2D) {
@@ -19,7 +21,7 @@ public class ShapeDrawer {
         for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
             switch (shape.getShapeType()) {
                 case RECTANGLE:
-                    IShapeStrategy shapeStrategy = new RectangleStrategy(shape);
+                    shapeStrategy = new RectangleStrategy(shape);
                     shapeToBeDrawn = shapeStrategy.createShape();
                     break;
                 case ELLIPSE:
@@ -33,16 +35,16 @@ public class ShapeDrawer {
             }
             switch (shape.getShadingType()) {
                 case OUTLINE_AND_FILLED_IN:
-                    IShadingStrategy currentState = new OutlineAndFilledInStrategy(shapeToBeDrawn, shape, g2D);
-                    currentState.drawWithSelectedShadingType();
+                    shadingStrategy = new OutlineAndFilledInStrategy(shapeToBeDrawn, shape, g2D);
+                    shadingStrategy.drawWithSelectedShadingType();
                     break;
                 case OUTLINE:
-                    currentState = new OutlineStrategy(shapeToBeDrawn, shape, g2D);
-                    currentState.drawWithSelectedShadingType();
+                    shadingStrategy = new OutlineStrategy(shapeToBeDrawn, shape, g2D);
+                    shadingStrategy.drawWithSelectedShadingType();
                     break;
                 case FILLED_IN:
-                    currentState = new FilledInStrategy(shapeToBeDrawn, shape, g2D);
-                    currentState.drawWithSelectedShadingType();
+                    shadingStrategy = new FilledInStrategy(shapeToBeDrawn, shape, g2D);
+                    shadingStrategy.drawWithSelectedShadingType();
                     break;
             }
         }

@@ -1,16 +1,13 @@
 package controller.commands;
 
 import controller.commands.interfaces.ICommand;
-import model.ShapeShadingType;
 import view.Shapes.BoundingBox;
 import view.Shapes.DetectCollision;
 import view.Shapes.MasterShapeList;
-import view.Shapes.Shape;
 import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class SelectCommand implements ICommand {
     private final Point pressedPoint;
