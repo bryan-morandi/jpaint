@@ -2,7 +2,6 @@ package view.interfaces;
 
 import java.awt.Shape;
 
-public interface IShapeStrategy {
-
+public interface IShapeFactory {
     Shape createShape();
 }

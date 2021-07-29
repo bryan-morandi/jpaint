@@ -1,16 +1,15 @@
 package view.Shapes;
 
-import view.interfaces.IShadingStrategy;
 import view.interfaces.IShape;
-import view.interfaces.IShapeStrategy;
+import view.interfaces.IShapeFactory;
 
 import java.awt.*;
 import java.awt.Shape;
 
 public class ShapeDrawer {
     private final Graphics2D g2D;
-    private IShapeStrategy shapeStrategy;
-    private IShadingStrategy shadingStrategy;
+    private IShapeFactory shapeFactory;
+    private ShadingContext shadingContext;
     private Shape shapeToBeDrawn;
 
     public ShapeDrawer(Graphics2D g2D) {
@@ -21,32 +20,31 @@ public class ShapeDrawer {
         for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
             switch (shape.getShapeType()) {
                 case RECTANGLE:
-                    shapeStrategy = new RectangleStrategy(shape);
-                    shapeToBeDrawn = shapeStrategy.createShape();
+                    shapeFactory = new RectangleFactory(shape);
+                    shapeToBeDrawn = shapeFactory.createShape();
                     break;
                 case ELLIPSE:
-                    shapeStrategy = new EllipsesStrategy(shape);
-                    shapeToBeDrawn = shapeStrategy.createShape();
+                    shapeFactory = new EllipsesFactory(shape);
+                    shapeToBeDrawn = shapeFactory.createShape();
                     break;
                 case TRIANGLE:
-                    shapeStrategy = new TriangleStrategy(shape);
-                    shapeToBeDrawn = shapeStrategy.createShape();
+                    shapeFactory = new TriangleFactory(shape);
+                    shapeToBeDrawn = shapeFactory.createShape();
                     break;
             }
+            shadingContext = new ShadingContext();
             switch (shape.getShadingType()) {
                 case OUTLINE_AND_FILLED_IN:
-                    shadingStrategy = new OutlineAndFilledInStrategy(shapeToBeDrawn, shape, g2D);
-                    shadingStrategy.drawWithSelectedShadingType();
+                    shadingContext.setShadingStrategy(new OutlineAndFilledInStrategy(shapeToBeDrawn, shape, g2D));
                     break;
                 case OUTLINE:
-                    shadingStrategy = new OutlineStrategy(shapeToBeDrawn, shape, g2D);
-                    shadingStrategy.drawWithSelectedShadingType();
+                    shadingContext.setShadingStrategy(new OutlineStrategy(shapeToBeDrawn, shape, g2D));
                     break;
                 case FILLED_IN:
-                    shadingStrategy = new FilledInStrategy(shapeToBeDrawn, shape, g2D);
-                    shadingStrategy.drawWithSelectedShadingType();
+                    shadingContext.setShadingStrategy(new FilledInStrategy(shapeToBeDrawn, shape, g2D));
                     break;
             }
+            shadingContext.executeShadingStrategy();
         }
     }
 }

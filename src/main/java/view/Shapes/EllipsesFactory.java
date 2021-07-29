@@ -1,15 +1,15 @@
 package view.Shapes;
 
 import view.interfaces.IShape;
-import view.interfaces.IShapeStrategy;
+import view.interfaces.IShapeFactory;
 
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
-public class EllipsesStrategy implements IShapeStrategy {
+public class EllipsesFactory implements IShapeFactory {
     private final IShape shape;
 
-    public EllipsesStrategy (IShape Shape ) {
+    public EllipsesFactory(IShape Shape ) {
         this.shape = Shape;
     }
 

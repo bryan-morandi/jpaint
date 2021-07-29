@@ -23,7 +23,7 @@ dependencies {
 }
 
 //TODO: change to your userid, such as  DWALKE30
-def user = 'demo'
+def user = 'BMORANDI'
 
 task packageDistribution(type: Zip) {
     dependsOn check

@@ -1,15 +1,15 @@
 package view.Shapes;
 
 import view.interfaces.IShape;
-import view.interfaces.IShapeStrategy;
+import view.interfaces.IShapeFactory;
 
 import java.awt.*;
 import java.awt.Shape;
 
-public class TriangleStrategy implements IShapeStrategy {
+public class TriangleFactory implements IShapeFactory {
     private final IShape shape;
 
-    public TriangleStrategy (IShape Shape ) {
+    public TriangleFactory(IShape Shape ) {
         this.shape = Shape;
     }
 

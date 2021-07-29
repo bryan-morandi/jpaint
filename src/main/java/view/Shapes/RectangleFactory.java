@@ -1,15 +1,15 @@
 package view.Shapes;
 
 import view.interfaces.IShape;
-import view.interfaces.IShapeStrategy;
+import view.interfaces.IShapeFactory;
 
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-public class RectangleStrategy implements IShapeStrategy {
+public class RectangleFactory implements IShapeFactory {
     private final IShape shape;
 
-    public RectangleStrategy (IShape Shape ) {
+    public RectangleFactory(IShape Shape ) {
        this.shape = Shape;
     }
 
