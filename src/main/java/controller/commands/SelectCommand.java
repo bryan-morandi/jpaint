@@ -31,6 +31,7 @@ public class SelectCommand implements ICommand {
             if (shape.getSelected()) {
                 selectedCount++;
             }
+            paintCanvas.repaint();
         }
         System.out.println("Number of selected shapes: " + selectedCount);
         }

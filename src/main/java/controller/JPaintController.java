@@ -2,6 +2,7 @@ package controller;
 
 import controller.commands.RedoCommand;
 import controller.commands.UndoCommand;
+import model.MouseMode;
 import model.interfaces.IApplicationState;
 import view.EventName;
 import view.interfaces.IUiModule;

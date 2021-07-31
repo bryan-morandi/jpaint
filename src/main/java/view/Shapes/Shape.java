@@ -100,8 +100,4 @@ public class Shape implements IShape {
     public void setX(int newX) { this.X = newX; }
     @Override
     public  void  setY(int newY) { this.Y = newY; }
-    @Override
-    public void setHeight(int newH) { this.height = newH; }
-    @Override
-    public  void  setWidth(int newW) { this.width = newW; }
 }

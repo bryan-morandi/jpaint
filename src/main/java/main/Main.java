@@ -19,6 +19,7 @@ public class Main {
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
 
+
         MouseClickTracker mouseAdapter = new MouseClickTracker(paintCanvas, appState);
         paintCanvas.addMouseListener(mouseAdapter);
 

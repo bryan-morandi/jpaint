@@ -19,7 +19,7 @@ public class OutlineStrategy implements IShadingStrategy {
     @Override
     public void drawWithSelectedShadingType() {
         g2D.setColor(shape.getPrimaryColor());
-        g2D.setStroke(new BasicStroke(5));
+        g2D.setStroke(new BasicStroke(4));
         g2D.draw(shapeToBeDrawn);
     }
 }

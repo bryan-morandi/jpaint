@@ -45,7 +45,8 @@ public class ShapeDrawer {
                     break;
             }
             shadingContext.executeShadingStrategy();
+
+            }
         }
     }
-}
 
