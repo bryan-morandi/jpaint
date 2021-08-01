@@ -12,7 +12,7 @@ import java.awt.*;
 public class SelectCommand implements ICommand {
     private final Point pressedPoint;
     private final Point releasedPoint;
-    private final PaintCanvas paintCanvas; // may need paint canvas later to print dotted line around shapes
+    private final PaintCanvas paintCanvas;
     private int selectedCount = 0;
 
     public  SelectCommand(Point PressedPoint, Point ReleasedPoint, PaintCanvas PaintCanvas) {

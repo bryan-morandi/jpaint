@@ -5,7 +5,6 @@ import model.ShapeType;
 import view.interfaces.IShape;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 
 public class SelectedTriangleDecorator extends SelectedShapeDecorator {
 

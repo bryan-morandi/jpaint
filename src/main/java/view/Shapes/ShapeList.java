@@ -11,13 +11,11 @@ public class ShapeList {
     public void add(IShape shape) {
         if(!shapeList.contains(shape))
             shapeList.add(shape);
-            //System.out.println("adding shape\n" + MasterShapeList.masterShapeList.size());
     }
 
     public void remove(IShape shape){
 
         shapeList.remove(shape);
-        //System.out.println("removing shape\n" + MasterShapeList.masterShapeList.size());
     }
 
     public int size() {
@@ -27,10 +25,6 @@ public class ShapeList {
     public ArrayList<IShape> getShapeList() {
         return shapeList;
     }
-
-    //    public IShape get(int index) {
-//        return shapeList.get(index);
-//    }
 
     }
 

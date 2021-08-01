@@ -1,8 +1,6 @@
 package view.gui;
 
-import model.ShapeType;
 import view.Shapes.BorderShapeSelector;
-import view.Shapes.SelectedRectangleDecorator;
 import view.interfaces.IShape;
 import view.Shapes.MasterShapeList;
 import view.interfaces.PaintCanvasBase;
@@ -32,7 +30,6 @@ public class PaintCanvas extends PaintCanvasBase {
         for (IShape shape : shapeList) {
             if (shape.getSelected()) {
                 shape = new BorderShapeSelector(shape, g2d).selectShape();
-                shape.draw(g2d);
             }
             shape.draw(g2d);
         }
