@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class CreateAShapeCommand implements ICommand, IUndoable {
     private final PaintCanvas paintCanvas;
-    private Shape shape;
+    private final Shape shape;
 
     public CreateAShapeCommand(Point pressedPoint, Point releasedPoint, PaintCanvas paintCanvas, ApplicationState appState) {
         this.paintCanvas = paintCanvas;

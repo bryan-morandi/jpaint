@@ -79,9 +79,7 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
     }
 
     @Override
-    public void setSelected(boolean selectedStatus) {
-
-    }
+    public void setSelected(boolean selectedStatus) { }
 
     @Override
     public boolean getSelected() {
@@ -139,12 +137,20 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
     }
 
     @Override
-    public void setX(int newX) {
-
-    }
+    public int getPasted() { return decoratedSelectedShape.getPasted(); }
 
     @Override
-    public void setY(int newY) {
+    public int incrementPasted() { return decoratedSelectedShape.incrementPasted();}
 
-    }
+    @Override
+    public int decrementPasted() { return decoratedSelectedShape.decrementPasted();}
+
+    @Override
+    public void resetPasted() { decoratedSelectedShape.resetPasted(); }
+
+    @Override
+    public void setX(int newX) { }
+
+    @Override
+    public void setY(int newY) { }
 }

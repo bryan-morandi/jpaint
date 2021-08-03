@@ -22,9 +22,10 @@ public class PasteCommand implements ICommand, IUndoable {
     @Override
     public void run() {
         for (IShape shape : clipBoard){
-            Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false);
-            copiedShape.setX(shape.getX()+200);
-            copiedShape.setY(shape.getY()+50);
+            Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.incrementPasted());
+            copiedShape.incrementPasted();
+            copiedShape.setX(shape.getX()+50*shape.getPasted());
+            copiedShape.setY(shape.getY()+50*shape.getPasted());
             masterList.add(copiedShape);
             pastedShapes.add(copiedShape);
         }
@@ -35,12 +36,22 @@ public class PasteCommand implements ICommand, IUndoable {
     @Override
     public void undo() {
        masterList.removeAll(pastedShapes);
+       for (IShape shape : clipBoard) {
+           if (shape.getPasted() > 0) {
+               shape.decrementPasted();
+           }
+       }
        paintCanvas.repaint();
     }
 
     @Override
     public void redo() {
         masterList.addAll(pastedShapes);
+        for (IShape shape : clipBoard) {
+            if (shape.getPasted() > 0) {
+                shape.incrementPasted();
+            }
+        }
         paintCanvas.repaint();
     }
 }

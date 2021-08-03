@@ -13,6 +13,10 @@ public interface IShape {
     int getY();
     int getWidth();
     int getHeight();
+    int getPasted();
+    int incrementPasted();
+    int decrementPasted();
+    void resetPasted();
     Point getReleasedPoint();
     Point getPressedPoint();
     Color getPrimaryColor();

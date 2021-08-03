@@ -52,7 +52,7 @@ public class ShapeBuilder {
     //builder method
     public Shape buildShape() {
         return new Shape (pressedPoint, releasedPoint, shapeType, shadingType, primaryColor,
-                secondaryColor, selected);
+                secondaryColor, selected, 0);
     }
 
 }

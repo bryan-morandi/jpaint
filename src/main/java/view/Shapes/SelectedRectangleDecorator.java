@@ -88,6 +88,18 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
     }
 
     @Override
+    public int getPasted() { return decoratedSelectedShape.getPasted(); }
+
+    @Override
+    public int incrementPasted() { return decoratedSelectedShape.incrementPasted();}
+
+    @Override
+    public int decrementPasted() { return decoratedSelectedShape.decrementPasted();}
+
+    @Override
+    public void resetPasted() { decoratedSelectedShape.resetPasted(); }
+
+    @Override
     public void setX(int newX) {
 
     }

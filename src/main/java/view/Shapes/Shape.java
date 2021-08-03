@@ -11,11 +11,11 @@ public class Shape implements IShape {
     private final ShapeType shapeType;
     private final ShapeShadingType shadingType;
     private final Color primaryColor, secondaryColor;
-    private int X, Y, width, height;
+    private int X, Y, width, height, pasted;
     private boolean selected;
 
     public Shape (Point pressedPoint, Point releasedPoint, ShapeType shapeType, ShapeShadingType shadingType,
-                  Color primaryColor, Color secondaryColor, boolean selected) {
+                  Color primaryColor, Color secondaryColor, boolean selected, int pasted) {
         this.pressedPoint = pressedPoint;
         this.releasedPoint = releasedPoint;
         this.shapeType = shapeType;
@@ -23,6 +23,7 @@ public class Shape implements IShape {
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
         this.selected = selected;
+        this.pasted = pasted;
         getCoordinates();
     }
 
@@ -100,4 +101,20 @@ public class Shape implements IShape {
     public void setX(int newX) { this.X = newX; }
     @Override
     public  void  setY(int newY) { this.Y = newY; }
+    @Override
+    public int incrementPasted() {
+        return pasted++;
+    }
+    @Override
+    public int decrementPasted() {
+        return pasted--;
+    }
+    @Override
+    public int getPasted() {
+        return this.pasted;
+    }
+    @Override
+    public void resetPasted() {
+        pasted = 0;
+    }
 }
