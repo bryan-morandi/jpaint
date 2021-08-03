@@ -8,12 +8,14 @@ import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SelectCommand implements ICommand {
     private final Point pressedPoint;
     private final Point releasedPoint;
     private final PaintCanvas paintCanvas;
     private int selectedCount = 0;
+    private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
 
     public  SelectCommand(Point PressedPoint, Point ReleasedPoint, PaintCanvas PaintCanvas) {
         this.pressedPoint = PressedPoint;
@@ -25,7 +27,7 @@ public class SelectCommand implements ICommand {
     public void run() {
         BoundingBox boundingBox = new BoundingBox(pressedPoint,releasedPoint);
 
-        for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
+        for (IShape shape : masterList) {
             DetectCollision detectCollision = new DetectCollision(boundingBox, shape);
             shape.setSelected(detectCollision.run());
             if (shape.getSelected()) {

@@ -24,5 +24,6 @@ public class OutlineAndFilledInStrategy implements IShadingStrategy {
         g2D.setStroke(new BasicStroke(4));
         g2D.setColor(shape.getSecondaryColor());
         g2D.draw(shapeToBeDrawn);
+
     }
 }

@@ -8,20 +8,19 @@ import java.awt.*;
 
 public class SelectedTriangleDecorator extends SelectedShapeDecorator {
 
-    public SelectedTriangleDecorator(IShape decoratedSelectedShape, Graphics2D g2D) {
-        super(decoratedSelectedShape, g2D);
+    public SelectedTriangleDecorator(IShape decoratedSelectedShape) {
+        super(decoratedSelectedShape);
     }
 
     @Override
     public void draw(Graphics2D g) {
-        setTriangleBorder(decoratedSelectedShape);
-        decoratedSelectedShape.draw(g2D);
+        setTriangleBorder(decoratedSelectedShape, g);
     }
 
-    private void setTriangleBorder(IShape decoratedSelectedShape) {
+    private void setTriangleBorder(IShape decoratedSelectedShape, Graphics2D g) {
         Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-        g2D.setStroke(stroke);
-        g2D.setColor(Color.BLACK);
+        g.setStroke(stroke);
+        g.setColor(Color.BLACK);
         Polygon triangle;
         int nPoints = 3;
         int[] xPoints;
@@ -76,7 +75,7 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
             };
         }
         triangle = new Polygon(xPoints, yPoints, nPoints);
-        g2D.draw(triangle);
+        g.draw(triangle);
     }
 
     @Override

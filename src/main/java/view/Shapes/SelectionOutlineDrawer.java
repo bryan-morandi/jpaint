@@ -2,28 +2,25 @@ package view.Shapes;
 
 import view.interfaces.IShape;
 
-import java.awt.*;
 
-public class BorderShapeSelector {
+public class SelectionOutlineDrawer {
     private IShape shape;
-    private final Graphics2D g2d;
 
-    public BorderShapeSelector(IShape Shape, Graphics2D g2D) {
+    public SelectionOutlineDrawer(IShape Shape) {
         this.shape = Shape;
-        this.g2d = g2D;
 
     }
 
     public IShape selectShape() {
         switch (shape.getShapeType()) {
             case RECTANGLE:
-                shape = new SelectedRectangleDecorator(shape, g2d);
+                shape = new SelectedRectangleDecorator(shape);
                 break;
             case ELLIPSE:
-                shape = new SelectedEllipsesDecorator(shape, g2d);
+                shape = new SelectedEllipsesDecorator(shape);
                 break;
             case TRIANGLE:
-                shape = new SelectedTriangleDecorator(shape, g2d);
+                shape = new SelectedTriangleDecorator(shape);
                 break;
         }
         return shape;

@@ -7,11 +7,11 @@ import view.interfaces.IShape;
 import java.util.ArrayList;
 
 public class CopyCommand implements ICommand {
+    private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
+    private final ArrayList<IShape> clipBoard = MasterShapeList.clipBoard.getShapeList();
 
     @Override
     public void run() {
-        ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
-        ArrayList<IShape> clipBoard = MasterShapeList.clipBoard.getShapeList();
         clipBoard.clear();
         for (IShape shape: masterList) {
             if (shape.getSelected())

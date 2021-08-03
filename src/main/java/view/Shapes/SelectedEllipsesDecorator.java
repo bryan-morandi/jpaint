@@ -9,23 +9,22 @@ import java.awt.geom.Ellipse2D;
 
 public class SelectedEllipsesDecorator extends SelectedShapeDecorator {
 
-    public SelectedEllipsesDecorator(IShape decoratedSelectedShape, Graphics2D g2D) {
-        super(decoratedSelectedShape, g2D);
+    public SelectedEllipsesDecorator(IShape decoratedSelectedShape) {
+        super(decoratedSelectedShape);
     }
 
     @Override
     public void draw(Graphics2D g) {
-        setEllipsesBorder(decoratedSelectedShape);
-        decoratedSelectedShape.draw(g2D);
+        setEllipsesBorder(decoratedSelectedShape, g);
     }
 
-    private void setEllipsesBorder(IShape decoratedSelectedShape) {
+    private void setEllipsesBorder(IShape decoratedSelectedShape, Graphics2D g) {
         Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-        g2D.setStroke(stroke);
-        g2D.setColor(Color.BLACK);
+        g.setStroke(stroke);
+        g.setColor(Color.BLACK);
         Ellipse2D.Double ellipses;
         ellipses = new Ellipse2D.Double(decoratedSelectedShape.getX()-5,decoratedSelectedShape.getY()-5,decoratedSelectedShape.getWidth()+10, decoratedSelectedShape.getHeight()+10);
-        g2D.draw(ellipses);
+        g.draw(ellipses);
     }
 
     @Override

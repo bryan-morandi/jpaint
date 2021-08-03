@@ -9,23 +9,22 @@ import java.awt.geom.Rectangle2D;
 
 public class SelectedRectangleDecorator extends SelectedShapeDecorator {
 
-    public SelectedRectangleDecorator(IShape decoratedSelectedShape, Graphics2D g2D) {
-        super(decoratedSelectedShape, g2D);
+    public SelectedRectangleDecorator(IShape decoratedSelectedShape) {
+        super(decoratedSelectedShape);
     }
 
     @Override
     public void draw(Graphics2D g) {
-        setRectangleBorder(decoratedSelectedShape);
-        decoratedSelectedShape.draw(g2D);
+        setRectangleBorder(decoratedSelectedShape, g);
     }
 
-    private void setRectangleBorder(IShape decoratedSelectedShape) {
+    private void setRectangleBorder(IShape decoratedSelectedShape, Graphics2D g) {
         Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-        g2D.setStroke(stroke);
-        g2D.setColor(Color.BLACK);
+        g.setStroke(stroke);
+        g.setColor(Color.BLACK);
         Rectangle2D.Double rectangle;
         rectangle = new Rectangle2D.Double(decoratedSelectedShape.getX()-5, decoratedSelectedShape.getY()-5, decoratedSelectedShape.getWidth()+10, decoratedSelectedShape.getHeight()+10);
-        g2D.draw(rectangle);
+        g.draw(rectangle);
     }
 
     @Override

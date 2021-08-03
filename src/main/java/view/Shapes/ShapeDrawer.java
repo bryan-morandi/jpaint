@@ -5,19 +5,21 @@ import view.interfaces.IShapeFactory;
 
 import java.awt.*;
 import java.awt.Shape;
+import java.util.ArrayList;
 
 public class ShapeDrawer {
     private final Graphics2D g2D;
     private IShapeFactory shapeFactory;
     private ShadingContext shadingContext;
     private Shape shapeToBeDrawn;
+    private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
 
     public ShapeDrawer(Graphics2D g2D) {
         this.g2D = g2D;
     }
 
     public void draw() {
-        for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
+        for (IShape shape : masterList) {
             switch (shape.getShapeType()) {
                 case RECTANGLE:
                     shapeFactory = new RectangleFactory(shape);
@@ -45,7 +47,6 @@ public class ShapeDrawer {
                     break;
             }
             shadingContext.executeShadingStrategy();
-
             }
         }
     }

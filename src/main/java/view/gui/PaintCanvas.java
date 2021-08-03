@@ -1,6 +1,6 @@
 package view.gui;
 
-import view.Shapes.BorderShapeSelector;
+import view.Shapes.SelectionOutlineDrawer;
 import view.interfaces.IShape;
 import view.Shapes.MasterShapeList;
 import view.interfaces.PaintCanvasBase;
@@ -26,12 +26,14 @@ public class PaintCanvas extends PaintCanvasBase {
         Graphics2D g2d = (Graphics2D) g;
         ArrayList<IShape> shapeList = MasterShapeList.masterShapeList.getShapeList();
 
-
+        for (IShape shape : shapeList) {
+            shape.draw(g2d);
+        }
         for (IShape shape : shapeList) {
             if (shape.getSelected()) {
-                shape = new BorderShapeSelector(shape, g2d).selectShape();
+                shape = new SelectionOutlineDrawer(shape).selectShape();
+                shape.draw(g2d);
             }
-            shape.draw(g2d);
         }
     }
 }
