@@ -117,4 +117,10 @@ public class Shape implements IShape {
     public void resetPasted() {
         pasted = 0;
     }
+    @Override
+    public void setPoints(IShape shape) {
+        pressedPoint.setLocation(shape.getX(), shape.getY());
+        releasedPoint.setLocation(shape.getX() + shape.getWidth(), shape.getY() + shape.getHeight());
+    }
+
 }

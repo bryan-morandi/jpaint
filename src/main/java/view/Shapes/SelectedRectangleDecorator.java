@@ -28,9 +28,7 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
     }
 
     @Override
-    public void setSelected(boolean selectedStatus) {
-
-    }
+    public void setSelected(boolean selectedStatus) { }
 
     @Override
     public boolean getSelected() {
@@ -100,12 +98,11 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
     public void resetPasted() { decoratedSelectedShape.resetPasted(); }
 
     @Override
-    public void setX(int newX) {
-
-    }
+    public void setX(int newX) { }
 
     @Override
-    public void setY(int newY) {
+    public void setY(int newY) { }
 
-    }
+    @Override
+    public void setPoints(IShape shape) { }
 }

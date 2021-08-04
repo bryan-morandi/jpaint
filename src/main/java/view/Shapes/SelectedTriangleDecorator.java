@@ -153,4 +153,7 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
 
     @Override
     public void setY(int newY) { }
+
+    @Override
+    public void setPoints(IShape shape) { }
 }

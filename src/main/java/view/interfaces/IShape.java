@@ -25,4 +25,5 @@ public interface IShape {
     ShapeShadingType getShadingType();
     void setX(int newX);
     void setY(int newY);
+    void setPoints(IShape shape);
 }

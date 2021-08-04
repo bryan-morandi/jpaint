@@ -5,9 +5,11 @@ import controller.commands.interfaces.IUndoable;
 import view.Shapes.MasterShapeList;
 import view.Shapes.ShapeList;
 import view.gui.PaintCanvas;
+import view.Shapes.Shape;
 import view.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MoveCommand implements ICommand, IUndoable {
     private final Point pressedPoint;
@@ -15,6 +17,8 @@ public class MoveCommand implements ICommand, IUndoable {
     private final PaintCanvas paintCanvas;
     private int deltaX, deltaY;
     private final ShapeList movedShapes = new ShapeList();
+    private final ArrayList<IShape> clipBoard = MasterShapeList.clipBoard.getShapeList();
+    private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
 
     public MoveCommand(Point PressedPoint, Point ReleasedPoint, PaintCanvas PaintCanvas) {
         this.pressedPoint = PressedPoint;
@@ -41,9 +45,14 @@ public class MoveCommand implements ICommand, IUndoable {
 
     @Override
     public void run() {
-        for (IShape shape : MasterShapeList.masterShapeList.getShapeList()) {
+        for (IShape shape : masterList) {
             if (shape.getSelected()) {
                 movedShapes.add(move(shape));
+                if (clipBoard.contains(shape)) {
+                    Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.getPasted());
+                    copiedShape.resetPasted();
+                    clipBoard.set(clipBoard.indexOf(shape),copiedShape);
+                }
             }
         }
         CommandHistory.add(this);
