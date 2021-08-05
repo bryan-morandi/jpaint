@@ -86,16 +86,16 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
     }
 
     @Override
-    public int getPasted() { return decoratedSelectedShape.getPasted(); }
+    public int getPastedCount() { return decoratedSelectedShape.getPastedCount(); }
 
     @Override
-    public int incrementPasted() { return decoratedSelectedShape.incrementPasted();}
+    public int incrementPastedCount() { return decoratedSelectedShape.incrementPastedCount();}
 
     @Override
-    public int decrementPasted() { return decoratedSelectedShape.decrementPasted();}
+    public int decrementPastedCount() { return decoratedSelectedShape.decrementPastedCount();}
 
     @Override
-    public void resetPasted() { decoratedSelectedShape.resetPasted(); }
+    public void resetPastedCount() { decoratedSelectedShape.resetPastedCount(); }
 
     @Override
     public void setX(int newX) { }
@@ -103,6 +103,4 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
     @Override
     public void setY(int newY) { }
 
-    @Override
-    public void setPoints(IShape shape) { }
 }

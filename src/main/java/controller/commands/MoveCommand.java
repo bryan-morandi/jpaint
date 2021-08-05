@@ -38,19 +38,22 @@ public class MoveCommand implements ICommand, IUndoable {
         return shape;
     }
 
-    public void undoMove(IShape shape) {
+    public IShape undoMove(IShape shape) {
         shape.setX(shape.getX() - deltaX);
         shape.setY(shape.getY() - deltaY);
+        return shape;
     }
 
     @Override
     public void run() {
         for (IShape shape : masterList) {
             if (shape.getSelected()) {
-                movedShapes.add(move(shape));
+                IShape movedShape = move(shape);
+                movedShapes.add(movedShape);
                 if (clipBoard.contains(shape)) {
-                    Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.getPasted());
-                    copiedShape.resetPasted();
+                    Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.getPastedCount());
+                    copiedShape.setX(movedShape.getX() - deltaX);
+                    copiedShape.setY(movedShape.getY() - deltaY);
                     clipBoard.set(clipBoard.indexOf(shape),copiedShape);
                 }
             }
@@ -64,6 +67,12 @@ public class MoveCommand implements ICommand, IUndoable {
     public void undo() {
         for (IShape shape : movedShapes.getShapeList()) {
             undoMove(shape);
+            if (clipBoard.contains(shape)) {
+                Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.getPastedCount());
+                copiedShape.setX(shape.getX() - deltaX * shape.getPastedCount());
+                copiedShape.setY((shape.getY() - deltaY * shape.getPastedCount()));
+                clipBoard.set(clipBoard.indexOf(shape), move(copiedShape));
+            }
         }
         paintCanvas.repaint();
     }

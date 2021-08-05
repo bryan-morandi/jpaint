@@ -13,10 +13,10 @@ public interface IShape {
     int getY();
     int getWidth();
     int getHeight();
-    int getPasted();
-    int incrementPasted();
-    int decrementPasted();
-    void resetPasted();
+    int getPastedCount();
+    int incrementPastedCount();
+    int decrementPastedCount();
+    void resetPastedCount();
     Point getReleasedPoint();
     Point getPressedPoint();
     Color getPrimaryColor();
@@ -25,5 +25,4 @@ public interface IShape {
     ShapeShadingType getShadingType();
     void setX(int newX);
     void setY(int newY);
-    void setPoints(IShape shape);
 }

@@ -22,10 +22,9 @@ public class PasteCommand implements ICommand, IUndoable {
     @Override
     public void run() {
         for (IShape shape : clipBoard){
-            Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.incrementPasted());
-            copiedShape.setX(shape.getX() + 50 * shape.getPasted());
-            copiedShape.setY(shape.getY() + 50 * shape.getPasted());
-            copiedShape.setPoints(copiedShape);
+            Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.incrementPastedCount());
+            copiedShape.setX(shape.getX() + 50 * shape.getPastedCount());
+            copiedShape.setY(shape.getY() + 50 * shape.getPastedCount());
             masterList.add(copiedShape);
             pastedShapes.add(copiedShape);
         }
@@ -37,9 +36,7 @@ public class PasteCommand implements ICommand, IUndoable {
     public void undo() {
        masterList.removeAll(pastedShapes);
        for (IShape shape : clipBoard) {
-           if (shape.getPasted() > 0) {
-               shape.decrementPasted();
-           }
+           shape.decrementPastedCount();
        }
        paintCanvas.repaint();
     }
@@ -48,9 +45,7 @@ public class PasteCommand implements ICommand, IUndoable {
     public void redo() {
         masterList.addAll(pastedShapes);
         for (IShape shape : clipBoard) {
-            if (shape.getPasted() > 0) {
-                shape.incrementPasted();
-            }
+            shape.incrementPastedCount();
         }
         paintCanvas.repaint();
     }

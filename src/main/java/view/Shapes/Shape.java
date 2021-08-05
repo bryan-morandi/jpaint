@@ -11,11 +11,11 @@ public class Shape implements IShape {
     private final ShapeType shapeType;
     private final ShapeShadingType shadingType;
     private final Color primaryColor, secondaryColor;
-    private int X, Y, width, height, pasted;
+    private int X, Y, width, height, pastedCount;
     private boolean selected;
 
     public Shape (Point pressedPoint, Point releasedPoint, ShapeType shapeType, ShapeShadingType shadingType,
-                  Color primaryColor, Color secondaryColor, boolean selected, int pasted) {
+                  Color primaryColor, Color secondaryColor, boolean selected, int pastedCount) {
         this.pressedPoint = pressedPoint;
         this.releasedPoint = releasedPoint;
         this.shapeType = shapeType;
@@ -23,7 +23,7 @@ public class Shape implements IShape {
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
         this.selected = selected;
-        this.pasted = pasted;
+        this.pastedCount = pastedCount;
         getCoordinates();
     }
 
@@ -102,25 +102,20 @@ public class Shape implements IShape {
     @Override
     public  void  setY(int newY) { this.Y = newY; }
     @Override
-    public int incrementPasted() {
-        return pasted++;
+    public int incrementPastedCount() {
+        return pastedCount++;
     }
     @Override
-    public int decrementPasted() {
-        return pasted--;
+    public int decrementPastedCount() {
+        return pastedCount--;
     }
     @Override
-    public int getPasted() {
-        return this.pasted;
+    public int getPastedCount() {
+        return this.pastedCount;
     }
     @Override
-    public void resetPasted() {
-        pasted = 0;
-    }
-    @Override
-    public void setPoints(IShape shape) {
-        pressedPoint.setLocation(shape.getX(), shape.getY());
-        releasedPoint.setLocation(shape.getX() + shape.getWidth(), shape.getY() + shape.getHeight());
+    public void resetPastedCount() {
+        pastedCount = 0;
     }
 
 }
