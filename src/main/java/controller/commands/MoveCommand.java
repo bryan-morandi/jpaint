@@ -38,10 +38,9 @@ public class MoveCommand implements ICommand, IUndoable {
         return shape;
     }
 
-    public IShape undoMove(IShape shape) {
+    public void undoMove(IShape shape) {
         shape.setX(shape.getX() - deltaX);
         shape.setY(shape.getY() - deltaY);
-        return shape;
     }
 
     @Override

@@ -25,6 +25,7 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
         int nPoints = 3;
         int[] xPoints;
         int[] yPoints;
+
         //equilateral triangle pointing north
         if (decoratedSelectedShape.getPressedPoint().x < decoratedSelectedShape.getReleasedPoint().x && decoratedSelectedShape.getPressedPoint().y < decoratedSelectedShape.getReleasedPoint().y ) {
             xPoints = new int[] {
@@ -44,7 +45,7 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
                     (decoratedSelectedShape.getX() + decoratedSelectedShape.getWidth())+10
             };
             yPoints = new int[] {
-                    (decoratedSelectedShape.getY() + decoratedSelectedShape.getHeight())+15,
+                    (decoratedSelectedShape.getY() + decoratedSelectedShape.getHeight())+10,
                     decoratedSelectedShape.getY()-5,
                     decoratedSelectedShape.getY()-5
             };

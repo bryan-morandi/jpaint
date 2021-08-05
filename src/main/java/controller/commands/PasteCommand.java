@@ -36,7 +36,9 @@ public class PasteCommand implements ICommand, IUndoable {
     public void undo() {
        masterList.removeAll(pastedShapes);
        for (IShape shape : clipBoard) {
-           shape.decrementPastedCount();
+           if (shape.getPastedCount() > 0) {
+               shape.decrementPastedCount();
+           }
        }
        paintCanvas.repaint();
     }
