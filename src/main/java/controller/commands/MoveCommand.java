@@ -69,7 +69,7 @@ public class MoveCommand implements ICommand, IUndoable {
             if (clipBoard.contains(shape)) {
                 Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.getPastedCount());
                 copiedShape.setX(shape.getX() - deltaX * shape.getPastedCount());
-                copiedShape.setY((shape.getY() - deltaY * shape.getPastedCount()));
+                copiedShape.setY(shape.getY() - deltaY * shape.getPastedCount());
                 clipBoard.set(clipBoard.indexOf(shape), move(copiedShape));
             }
         }

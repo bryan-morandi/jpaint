@@ -35,11 +35,11 @@ public class PasteCommand implements ICommand, IUndoable {
     @Override
     public void undo() {
        masterList.removeAll(pastedShapes);
-       for (IShape shape : clipBoard) {
-           if (shape.getPastedCount() > 0) {
-               shape.decrementPastedCount();
-           }
-       }
+        for (IShape shape : clipBoard) {
+            if (shape.getPastedCount() > 0) {
+                shape.decrementPastedCount();
+            }
+        }
        paintCanvas.repaint();
     }
 
@@ -47,7 +47,9 @@ public class PasteCommand implements ICommand, IUndoable {
     public void redo() {
         masterList.addAll(pastedShapes);
         for (IShape shape : clipBoard) {
-            shape.incrementPastedCount();
+            if (shape.getPastedCount() > 0) {
+                shape.incrementPastedCount();
+            }
         }
         paintCanvas.repaint();
     }
