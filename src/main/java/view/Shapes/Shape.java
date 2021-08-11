@@ -129,5 +129,4 @@ public class Shape implements IShape {
         this.resetPastedCount();
         MasterShapeList.clipBoard.add(this);
     }
-
 }

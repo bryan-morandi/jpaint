@@ -110,5 +110,4 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
     @Override
     public void copyShape() {};
 
-
 }

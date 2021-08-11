@@ -28,9 +28,6 @@ public class SelectCommand implements ICommand {
         BoundingBox boundingBox = new BoundingBox(pressedPoint,releasedPoint);
 
         for (IShape shape : masterList) {
-            if (shape.getSelected()) {
-                shape = shape.selectShape(boundingBox);
-            }
              shape.selectShape(boundingBox);
         }
         paintCanvas.repaint();
