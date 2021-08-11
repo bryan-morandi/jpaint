@@ -87,7 +87,7 @@ public class Shape implements IShape {
     @Override
     public void draw(Graphics2D g2D) {
         ShapeDrawer shapeDrawer = new ShapeDrawer(g2D);
-        shapeDrawer.draw();
+        shapeDrawer.draw(this);
     }
     @Override
     public void setSelected(boolean selectedStatus) {
@@ -116,6 +116,18 @@ public class Shape implements IShape {
     @Override
     public void resetPastedCount() {
         pastedCount = 0;
+    }
+    @Override
+    public IShape selectShape(BoundingBox boundingBox) {
+        DetectCollision detectCollision = new DetectCollision(boundingBox, this);
+        this.setSelected(detectCollision.run());
+        SelectionOutlineDrawer outlinedShape = new SelectionOutlineDrawer(this);
+        return outlinedShape.selectShape();
+    }
+    @Override
+    public void copyShape() {
+        this.resetPastedCount();
+        MasterShapeList.clipBoard.add(this);
     }
 
 }

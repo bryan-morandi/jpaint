@@ -28,13 +28,11 @@ public class SelectCommand implements ICommand {
         BoundingBox boundingBox = new BoundingBox(pressedPoint,releasedPoint);
 
         for (IShape shape : masterList) {
-            DetectCollision detectCollision = new DetectCollision(boundingBox, shape);
-            shape.setSelected(detectCollision.run());
             if (shape.getSelected()) {
-                selectedCount++;
+                shape = shape.selectShape(boundingBox);
             }
-            paintCanvas.repaint();
+             shape.selectShape(boundingBox);
         }
-        System.out.println("Number of selected shapes: " + selectedCount);
-        }
+        paintCanvas.repaint();
     }
+}

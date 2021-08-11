@@ -15,6 +15,7 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
 
     @Override
     public void draw(Graphics2D g) {
+        //decoratedSelectedShape.draw(g);
         setRectangleBorder(decoratedSelectedShape, g);
     }
 
@@ -102,5 +103,12 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
 
     @Override
     public void setY(int newY) { }
+
+    @Override
+    public IShape selectShape(BoundingBox boundingBox) { return decoratedSelectedShape;}
+
+    @Override
+    public void copyShape() {};
+
 
 }

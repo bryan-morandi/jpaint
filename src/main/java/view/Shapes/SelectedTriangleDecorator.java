@@ -14,6 +14,7 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
 
     @Override
     public void draw(Graphics2D g) {
+        //decoratedSelectedShape.draw(g);
         setTriangleBorder(decoratedSelectedShape, g);
     }
 
@@ -154,5 +155,14 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
 
     @Override
     public void setY(int newY) { }
+
+    @Override
+    public IShape selectShape(BoundingBox boundingBox) { return decoratedSelectedShape;}
+
+    @Override
+    public void copyShape() {};
+
+
+
 
 }

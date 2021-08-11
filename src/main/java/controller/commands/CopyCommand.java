@@ -15,9 +15,8 @@ public class CopyCommand implements ICommand {
         clipBoard.clear();
         for (IShape shape: masterList) {
             if (shape.getSelected()) {
-                shape.resetPastedCount();
-                clipBoard.add(shape);
-                }
+                shape.copyShape();
+            }
         }
         System.out.println(clipBoard.size() + " Shapes copied");
     }

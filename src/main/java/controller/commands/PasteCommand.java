@@ -50,6 +50,7 @@ public class PasteCommand implements ICommand, IUndoable {
             if (shape.getPastedCount() > 0) {
                 shape.incrementPastedCount();
             }
+
         }
         paintCanvas.repaint();
     }
