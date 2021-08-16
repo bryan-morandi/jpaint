@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class GroupCommand implements ICommand, IUndoable {
     private final PaintCanvas paintCanvas;
     private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
-    private final ShapeGroup group = new ShapeGroup(masterList);
+    private final ArrayList<IShape> groupList = MasterShapeList.groupList.getShapeList();
+    private ShapeGroup group;
     private final ArrayList<IShape> tempList = new ArrayList<>();
 
     public GroupCommand(PaintCanvas paintCanvas) {
@@ -25,11 +26,15 @@ public class GroupCommand implements ICommand, IUndoable {
         for (IShape shape : masterList) {
             if (shape.getSelected()) {
                 selectedCount++;
+                shape.setSelected(false);
                 tempList.add(shape);
             }
         }
         if (selectedCount > 1) {
             masterList.removeAll(tempList);
+            group = new ShapeGroup(tempList);
+            group.setSelected(true);
+            groupList.add(group);
             masterList.add(group);
             System.out.println("Master list size: " + masterList.size());
         } else

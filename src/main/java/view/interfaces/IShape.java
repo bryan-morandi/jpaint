@@ -1,9 +1,11 @@
 package view.interfaces;
 
+import controller.commands.Move;
 import model.ShapeShadingType;
 import model.ShapeType;
 import view.Shapes.BoundingBox;
 import view.Shapes.Shape;
+import view.gui.PaintCanvas;
 
 import java.awt.*;
 
@@ -46,8 +48,10 @@ public interface IShape {
 
     void setY(int newY);
 
-    IShape selectShape(BoundingBox boundingBox);
+    void selectShape(BoundingBox boundingBox);
 
     void copyShape();
+
+    void moveShape(int deltaX, int deltaY);
 
 }

@@ -1,7 +1,9 @@
 package view.Shapes;
 
+import controller.commands.Move;
 import model.ShapeShadingType;
 import model.ShapeType;
+import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
@@ -9,18 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShapeGroup implements IShape {
-    private List<IShape> children = new ArrayList<>();
+    private final ArrayList<IShape> children;
     private  Point pressedPoint, releasedPoint;
     private int X, Y, width, height, pastedCount;
     private boolean selected;
 
 
-    public ShapeGroup(List<IShape> ShapeList) {
-        for (IShape shape: ShapeList) {
-            if (shape.getSelected()) {
-                addChild(shape);
-            }
-        }
+    public ShapeGroup(ArrayList<IShape> ShapeList) {
+        children = ShapeList;
+
         this.X = getX();
         this.Y = getY();
         this.width = getWidth();
@@ -30,25 +29,14 @@ public class ShapeGroup implements IShape {
         this.releasedPoint = getReleasedPoint();
     }
 
-    public ShapeGroup(ShapeGroup group) {
-        this.children = group.children;
-        this.pressedPoint = group.pressedPoint;
-        this.releasedPoint = group.releasedPoint;
-        this.X = group.X;
-        this.Y = group.Y;
-        this.width = group.width;
-        this.height = group.height;
-        this.pastedCount = group.pastedCount;
-        this.selected = group.selected;
-    }
-
-
     public void addChild(IShape component) {
-        children.add(component);
+        if (!children.contains(component)){
+            children.add(component);
+        }
     }
 
-    public IShape removeChild() {
-        return children.remove(children.size()-1);
+    public void removeChild(IShape component) {
+        children.remove(component);
     }
 
     public void clear() {
@@ -60,6 +48,10 @@ public class ShapeGroup implements IShape {
             MasterShapeList.masterShapeList.add(child);
         }
         MasterShapeList.masterShapeList.remove(this);
+    }
+
+    public ArrayList<IShape> getChildren() {
+        return children;
     }
 
     @Override
@@ -232,22 +224,29 @@ public class ShapeGroup implements IShape {
     }
 
     @Override
-    public IShape selectShape(BoundingBox boundingBox) {
+    public void selectShape(BoundingBox boundingBox) {
         for (IShape child : children) {
             child.selectShape(boundingBox);
         }
         DetectCollision detectCollision = new DetectCollision(boundingBox, this);
         this.setSelected(detectCollision.run());
-        SelectionOutlineDrawer outlinedShape =  new SelectionOutlineDrawer(this);
-        if (this.getSelected()) {
-            return outlinedShape.selectShape();
-        }
-        return outlinedShape.getOriginalShape();
     }
 
+    @Override
     public void copyShape() {
         this.resetPastedCount();
         MasterShapeList.clipBoard.add(this);
+    }
+
+    @Override
+    public void moveShape(int deltaX, int deltaY) {
+        for (IShape child : children) {
+            Move move = new Move(deltaX, deltaY, child);
+            move.run();
+        }
+        //this.moveShape(deltaX,deltaY);
+        //Move move = new Move(deltaX, deltaY, this);
+        //move.run();
     }
 
 }

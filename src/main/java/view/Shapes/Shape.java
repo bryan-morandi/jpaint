@@ -1,7 +1,9 @@
 package view.Shapes;
 
+import controller.commands.Move;
 import model.ShapeShadingType;
 import model.ShapeType;
+import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
@@ -118,15 +120,18 @@ public class Shape implements IShape {
         pastedCount = 0;
     }
     @Override
-    public IShape selectShape(BoundingBox boundingBox) {
+    public void selectShape(BoundingBox boundingBox) {
         DetectCollision detectCollision = new DetectCollision(boundingBox, this);
         this.setSelected(detectCollision.run());
-        SelectionOutlineDrawer outlinedShape = new SelectionOutlineDrawer(this);
-        return outlinedShape.selectShape();
     }
     @Override
     public void copyShape() {
         this.resetPastedCount();
         MasterShapeList.clipBoard.add(this);
+    }
+    @Override
+    public void moveShape(int deltaX, int deltaY) {
+        Move move = new Move(deltaX, deltaY, this);
+        move.run();
     }
 }
