@@ -8,6 +8,7 @@ import view.Shapes.Shape;
 import view.gui.PaintCanvas;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public interface IShape {
     void draw(Graphics2D g);
@@ -53,5 +54,11 @@ public interface IShape {
     void copyShape();
 
     void moveShape(int deltaX, int deltaY);
+
+    void undoMove(int deltaX, int deltaY);
+
+    void pasteShape(ArrayList<IShape> pastedShapes);
+
+    void undoPaste(ArrayList<IShape> pastedShapes);
 
 }

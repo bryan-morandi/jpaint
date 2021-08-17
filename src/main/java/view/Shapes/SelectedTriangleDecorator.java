@@ -7,6 +7,7 @@ import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SelectedTriangleDecorator extends SelectedShapeDecorator {
 
@@ -169,5 +170,13 @@ public class SelectedTriangleDecorator extends SelectedShapeDecorator {
         Move move = new Move(deltaX, deltaY, this);
     }
 
+    @Override
+    public void undoMove(int deltaX, int deltaY) {}
+
+    @Override
+    public void pasteShape(ArrayList<IShape> pastedShapes) { }
+
+    @Override
+    public void undoPaste(ArrayList<IShape> pastedShapes) { }
 
 }

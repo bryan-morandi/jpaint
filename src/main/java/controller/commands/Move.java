@@ -16,7 +16,6 @@ public class Move implements ICommand, IUndoable {
     private IShape shape;
     private final ShapeList movedShapes = new ShapeList();
     private final ArrayList<IShape> clipBoard = MasterShapeList.clipBoard.getShapeList();
-    //private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
 
     public Move(int deltaX, int deltaY, IShape shape) {
         this.deltaX = deltaX;
@@ -45,8 +44,6 @@ public class Move implements ICommand, IUndoable {
             copiedShape.setY(movedShape.getY() - deltaY);
             clipBoard.set(clipBoard.indexOf(shape),copiedShape);
         }
-        //CommandHistory.add(this);
-        System.out.println("Shape(s) moved");
     }
 
     @Override
@@ -62,8 +59,6 @@ public class Move implements ICommand, IUndoable {
 
     @Override
     public void redo() {
-//        for (IShape shape : movedShapes.getShapeList()) {
-            move(shape);
-//        }
+        move(shape);
     }
 }

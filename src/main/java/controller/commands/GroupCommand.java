@@ -26,11 +26,12 @@ public class GroupCommand implements ICommand, IUndoable {
         for (IShape shape : masterList) {
             if (shape.getSelected()) {
                 selectedCount++;
-                shape.setSelected(false);
+                //shape.setSelected(false);
                 tempList.add(shape);
             }
         }
         if (selectedCount > 1) {
+            //groupList.clear();
             masterList.removeAll(tempList);
             group = new ShapeGroup(tempList);
             group.setSelected(true);
@@ -45,7 +46,12 @@ public class GroupCommand implements ICommand, IUndoable {
 
     @Override
     public void undo() {
-        group.unGroup();
+        //group.unGroup();
+        for (IShape child : group.getChildren()) {
+            masterList.add(child);
+        }
+        masterList.remove(group);
+        groupList.remove(group);
         paintCanvas.repaint();
     }
 
@@ -53,6 +59,7 @@ public class GroupCommand implements ICommand, IUndoable {
     public void redo() {
         masterList.removeAll(tempList);
         masterList.add(group);
+        groupList.add(group);
         paintCanvas.repaint();
     }
 }

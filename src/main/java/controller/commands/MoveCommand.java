@@ -32,16 +32,16 @@ public class MoveCommand implements ICommand, IUndoable {
         deltaY = releasedPoint.y - pressedPoint.y;
     }
 
-    public IShape move(IShape shape) {
-        shape.setX(shape.getX() + deltaX);
-        shape.setY(shape.getY() + deltaY);
-        return shape;
-    }
-
-    public void undoMove(IShape shape) {
-        shape.setX(shape.getX() - deltaX);
-        shape.setY(shape.getY() - deltaY);
-    }
+//    public IShape move(IShape shape) {
+//        shape.setX(shape.getX() + deltaX);
+//        shape.setY(shape.getY() + deltaY);
+//        return shape;
+//    }
+//
+//    public void undoMove(IShape shape) {
+//        shape.setX(shape.getX() - deltaX);
+//        shape.setY(shape.getY() - deltaY);
+//    }
 
     @Override
     public void run() {
@@ -68,7 +68,7 @@ public class MoveCommand implements ICommand, IUndoable {
     public void undo() {
         for (IShape shape : movedShapes.getShapeList()) {
             //shape.moveShape(deltaX,deltaY);
-            new Move(deltaX, deltaY, shape).undo();
+            shape.undoMove(deltaX, deltaY);
 //            undoMove(shape);
 //            if (clipBoard.contains(shape)) {
 //                Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.getPastedCount());
@@ -84,8 +84,8 @@ public class MoveCommand implements ICommand, IUndoable {
     public void redo() {
         for (IShape shape : movedShapes.getShapeList()) {
             //move(shape);
-            //shape.moveShape(deltaX,deltaY).redo();
-            new Move(deltaX, deltaY, shape).redo();
+            shape.moveShape(deltaX,deltaY);
+            //new Move(deltaX, deltaY, shape).redo();
         }
         paintCanvas.repaint();
     }

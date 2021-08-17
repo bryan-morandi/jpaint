@@ -8,6 +8,7 @@ import view.interfaces.IShape;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 public class SelectedRectangleDecorator extends SelectedShapeDecorator {
 
@@ -117,4 +118,12 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
         Move move = new Move(deltaX, deltaY, this);
     }
 
+    @Override
+    public void undoMove(int deltaX, int deltaY) {}
+
+    @Override
+    public void pasteShape(ArrayList<IShape> pastedShapes) { }
+
+    @Override
+    public void undoPaste(ArrayList<IShape> pastedShapes) { }
 }

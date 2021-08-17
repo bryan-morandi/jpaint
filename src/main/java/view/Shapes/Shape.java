@@ -1,12 +1,14 @@
 package view.Shapes;
 
 import controller.commands.Move;
+import controller.commands.Paste;
 import model.ShapeShadingType;
 import model.ShapeType;
 import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Shape implements IShape {
     private final Point pressedPoint, releasedPoint;
@@ -131,7 +133,22 @@ public class Shape implements IShape {
     }
     @Override
     public void moveShape(int deltaX, int deltaY) {
-        Move move = new Move(deltaX, deltaY, this);
-        move.run();
+        new Move(deltaX, deltaY, this).run();
+    }
+    @Override
+    public void undoMove(int deltaX, int deltaY) {
+        new Move(deltaX, deltaY, this).undo();
+    }
+
+    @Override
+    public void pasteShape(ArrayList<IShape> pastedShapes) {
+        new Paste(pastedShapes, this).run();
+        //MasterShapeList.masterShapeList.getShapeList().addAll(pastedShapes);
+    }
+
+    @Override
+    public void undoPaste(ArrayList<IShape> pastedShapes) {
+        new Paste(pastedShapes,this).undo();
+        //MasterShapeList.masterShapeList.getShapeList().removeAll(pastedShapes);
     }
 }

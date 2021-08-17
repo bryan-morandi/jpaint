@@ -1,6 +1,7 @@
 package view.Shapes;
 
 import controller.commands.Move;
+import controller.commands.Paste;
 import model.ShapeShadingType;
 import model.ShapeType;
 import view.gui.PaintCanvas;
@@ -10,16 +11,19 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShapeGroup implements IShape {
-    private final ArrayList<IShape> children;
+public class ShapeGroup implements IShape{
+    private final ArrayList<IShape> children = new ArrayList<IShape>();
     private  Point pressedPoint, releasedPoint;
     private int X, Y, width, height, pastedCount;
     private boolean selected;
 
 
     public ShapeGroup(ArrayList<IShape> ShapeList) {
-        children = ShapeList;
 
+        for (IShape shape : ShapeList) {
+            addChild(shape);
+        }
+        
         this.X = getX();
         this.Y = getY();
         this.width = getWidth();
@@ -27,6 +31,7 @@ public class ShapeGroup implements IShape {
         this.selected = getSelected();
         this.pressedPoint = getPressedPoint();
         this.releasedPoint = getReleasedPoint();
+
     }
 
     public void addChild(IShape component) {
@@ -225,15 +230,19 @@ public class ShapeGroup implements IShape {
 
     @Override
     public void selectShape(BoundingBox boundingBox) {
-        for (IShape child : children) {
-            child.selectShape(boundingBox);
-        }
+//        for (IShape child : children) {
+//            child.selectShape(boundingBox);
+//        }
         DetectCollision detectCollision = new DetectCollision(boundingBox, this);
         this.setSelected(detectCollision.run());
     }
 
     @Override
     public void copyShape() {
+//        for (IShape child : children) {
+//            child.resetPastedCount();
+//            child.copyShape();
+//        }
         this.resetPastedCount();
         MasterShapeList.clipBoard.add(this);
     }
@@ -241,12 +250,38 @@ public class ShapeGroup implements IShape {
     @Override
     public void moveShape(int deltaX, int deltaY) {
         for (IShape child : children) {
-            Move move = new Move(deltaX, deltaY, child);
-            move.run();
+            child.moveShape(deltaX, deltaY);
         }
-        //this.moveShape(deltaX,deltaY);
-        //Move move = new Move(deltaX, deltaY, this);
-        //move.run();
+    }
+    @Override
+    public void undoMove(int deltaX, int deltaY) {
+        for (IShape child : children) {
+            child.undoMove(deltaX, deltaY);
+        }
     }
 
+    @Override
+    public void pasteShape(ArrayList<IShape> pastedShapes) {
+        for (IShape child : children) {
+            child.pasteShape(pastedShapes);
+        }
+        ArrayList<IShape> clonedList = (ArrayList<IShape>) pastedShapes.clone();
+        ShapeGroup g = new ShapeGroup(clonedList);
+        pastedShapes.clear();
+        pastedShapes.add(g);
+        MasterShapeList.masterShapeList.getShapeList().add(g);
+        MasterShapeList.groupList.add(g);
+        //MasterShapeList.masterShapeList.getShapeList().removeAll(pastedShapes);
+    }
+
+    @Override
+    public void undoPaste(ArrayList<IShape> pastedShapes) {
+        for (IShape child : children) {
+            new Paste(pastedShapes, child).undo();
+        }
+        ArrayList<IShape> clonedList = (ArrayList<IShape>) pastedShapes.clone();
+        ShapeGroup g = new ShapeGroup(clonedList);
+        MasterShapeList.masterShapeList.getShapeList().remove(g);
+    }
 }
+

@@ -14,6 +14,7 @@ public class UngroupCommand implements ICommand, IUndoable {
     private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
     private final ArrayList<IShape> groupList = MasterShapeList.groupList.getShapeList();
     private ArrayList<IShape> tempList = new ArrayList<>();
+    private ArrayList<IShape> childList = new ArrayList<>();
 
     public UngroupCommand(PaintCanvas paintCanvas) {
         this.paintCanvas = paintCanvas;
@@ -22,16 +23,19 @@ public class UngroupCommand implements ICommand, IUndoable {
     @Override
     public void run() {
         for (IShape shape : groupList) {
-            if (shape.getSelected() ) {
-                //tempList.addAll(((ShapeGroup) shape).getChildren());
+            if (shape.getSelected() && shape instanceof ShapeGroup ) {
+                childList.addAll(((ShapeGroup) shape).getChildren());
                 tempList.add(shape);
-                ((ShapeGroup) shape).unGroup();
+                //((ShapeGroup) shape).unGroup();
                 masterList.remove(shape);
             }
             //masterList.addAll(tempList);
-            CommandHistory.add(this);
-            paintCanvas.repaint();
         }
+        groupList.removeAll(tempList);
+        //masterList.removeAll(tempList);
+        masterList.addAll(childList);
+        CommandHistory.add(this);
+        paintCanvas.repaint();
         System.out.println("Master list size: " + masterList.size());
     }
 

@@ -21,25 +21,29 @@ public class PasteCommand implements ICommand, IUndoable {
 
     @Override
     public void run() {
-        for (IShape shape : clipBoard){
-            Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.incrementPastedCount());
-            copiedShape.setX(shape.getX() + 50 * shape.getPastedCount());
-            copiedShape.setY(shape.getY() + 50 * shape.getPastedCount());
-            masterList.add(copiedShape);
-            pastedShapes.add(copiedShape);
+        for (IShape shape : clipBoard) {
+            shape.pasteShape(pastedShapes);
+//            Shape copiedShape = new Shape(shape.getPressedPoint(), shape.getReleasedPoint(), shape.getShapeType(), shape.getShadingType(), shape.getPrimaryColor(), shape.getSecondaryColor(),false, shape.incrementPastedCount());
+//            copiedShape.setX(shape.getX() + 50 * shape.getPastedCount());
+//            copiedShape.setY(shape.getY() + 50 * shape.getPastedCount());
+//            masterList.add(copiedShape);
+//            pastedShapes.add(copiedShape);
         }
+        masterList.addAll(pastedShapes);
         paintCanvas.repaint();
         CommandHistory.add(this);
     }
 
     @Override
     public void undo() {
-       masterList.removeAll(pastedShapes);
+       //masterList.removeAll(pastedShapes);
         for (IShape shape : clipBoard) {
-            if (shape.getPastedCount() > 0) {
-                shape.decrementPastedCount();
-            }
+            shape.undoPaste(pastedShapes);
+//            if (shape.getPastedCount() > 0) {
+//                shape.decrementPastedCount();
+//            }
         }
+        masterList.removeAll(pastedShapes);
        paintCanvas.repaint();
     }
 
@@ -47,9 +51,10 @@ public class PasteCommand implements ICommand, IUndoable {
     public void redo() {
         masterList.addAll(pastedShapes);
         for (IShape shape : clipBoard) {
-            if (shape.getPastedCount() > 0) {
-                shape.incrementPastedCount();
-            }
+            shape.pasteShape(pastedShapes);
+//            if (shape.getPastedCount() > 0) {
+//                shape.incrementPastedCount();
+//            }
 
         }
         paintCanvas.repaint();
