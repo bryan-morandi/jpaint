@@ -18,10 +18,6 @@ public class ShapeList {
         shapeList.remove(shape);
     }
 
-    public int size() {
-        return shapeList.size();
-    }
-
     public ArrayList<IShape> getShapeList() {
         return shapeList;
     }

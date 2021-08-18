@@ -3,7 +3,6 @@ package controller.commands;
 import controller.commands.interfaces.ICommand;
 import controller.commands.interfaces.IUndoable;
 import view.Shapes.MasterShapeList;
-import view.Shapes.Shape;
 import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 

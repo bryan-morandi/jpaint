@@ -13,8 +13,8 @@ public class UngroupCommand implements ICommand, IUndoable {
     private final PaintCanvas paintCanvas;
     private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
     private final ArrayList<IShape> groupList = MasterShapeList.groupList.getShapeList();
-    private ArrayList<IShape> tempList = new ArrayList<>();
-    private ArrayList<IShape> childList = new ArrayList<>();
+    private final ArrayList<IShape> tempList = new ArrayList<>();
+    private final ArrayList<IShape> childList = new ArrayList<>();
 
     public UngroupCommand(PaintCanvas paintCanvas) {
         this.paintCanvas = paintCanvas;
@@ -23,16 +23,21 @@ public class UngroupCommand implements ICommand, IUndoable {
     @Override
     public void run() {
         for (IShape shape : groupList) {
-            if (shape.getSelected() && shape instanceof ShapeGroup ) {
+            if (shape.getSelected()  ) {
                 childList.addAll(((ShapeGroup) shape).getChildren());
                 tempList.add(shape);
                 //((ShapeGroup) shape).unGroup();
-                masterList.remove(shape);
+                //masterList.remove(shape);
             }
             //masterList.addAll(tempList);
         }
         groupList.removeAll(tempList);
-        //masterList.removeAll(tempList);
+        for (IShape shape: childList) {
+            if (shape instanceof ShapeGroup) {
+                groupList.add(shape);
+            }
+        }
+        masterList.removeAll(tempList);
         masterList.addAll(childList);
         CommandHistory.add(this);
         paintCanvas.repaint();
@@ -41,11 +46,27 @@ public class UngroupCommand implements ICommand, IUndoable {
 
     @Override
     public void undo() {
-
+        groupList.addAll(tempList);
+        masterList.addAll(tempList);
+        masterList.removeAll(childList);
+        for (IShape shape: childList) {
+            if (shape instanceof ShapeGroup) {
+                groupList.remove(shape);
+            }
+        }
+        paintCanvas.repaint();
     }
 
     @Override
     public void redo() {
-
+        groupList.removeAll(tempList);
+        masterList.removeAll(tempList);
+        masterList.addAll(childList);
+        for (IShape shape: childList) {
+            if (shape instanceof ShapeGroup) {
+                groupList.add(shape);
+            }
+        }
+        paintCanvas.repaint();
     }
 }

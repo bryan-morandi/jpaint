@@ -1,20 +1,20 @@
 package view.Shapes;
 
-import controller.commands.Move;
 import controller.commands.Paste;
 import model.ShapeShadingType;
 import model.ShapeType;
-import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ShapeGroup implements IShape{
-    private final ArrayList<IShape> children = new ArrayList<IShape>();
-    private  Point pressedPoint, releasedPoint;
-    private int X, Y, width, height, pastedCount;
+    private final ArrayList<IShape> children = new ArrayList<>();
+    private int X;
+    private int Y;
+    private final int width;
+    private final int height;
+    private int pastedCount;
     private boolean selected;
 
 
@@ -29,8 +29,8 @@ public class ShapeGroup implements IShape{
         this.width = getWidth();
         this.height = getHeight();
         this.selected = getSelected();
-        this.pressedPoint = getPressedPoint();
-        this.releasedPoint = getReleasedPoint();
+        //Point pressedPoint = getPressedPoint();
+        //Point releasedPoint = getReleasedPoint();
 
     }
 
@@ -44,16 +44,16 @@ public class ShapeGroup implements IShape{
         children.remove(component);
     }
 
-    public void clear() {
-        children.clear();
-    }
-
-    public void unGroup() {
-        for (IShape child : children) {
-            MasterShapeList.masterShapeList.add(child);
-        }
-        MasterShapeList.masterShapeList.remove(this);
-    }
+//    public void clear() {
+//        children.clear();
+//    }
+//
+//    public void unGroup() {
+//        for (IShape child : children) {
+//            MasterShapeList.masterShapeList.add(child);
+//        }
+//        MasterShapeList.masterShapeList.remove(this);
+//    }
 
     public ArrayList<IShape> getChildren() {
         return children;
@@ -265,11 +265,11 @@ public class ShapeGroup implements IShape{
         for (IShape child : children) {
             child.pasteShape(pastedShapes);
         }
-        ArrayList<IShape> clonedList = (ArrayList<IShape>) pastedShapes.clone();
-        ShapeGroup g = new ShapeGroup(clonedList);
+        //ArrayList<IShape> clonedList = (ArrayList<IShape>) pastedShapes.clone();
+        ShapeGroup g = new ShapeGroup(pastedShapes);
         pastedShapes.clear();
         pastedShapes.add(g);
-        MasterShapeList.masterShapeList.getShapeList().add(g);
+        //MasterShapeList.masterShapeList.getShapeList().add(g);
         MasterShapeList.groupList.add(g);
         //MasterShapeList.masterShapeList.getShapeList().removeAll(pastedShapes);
     }
@@ -279,9 +279,10 @@ public class ShapeGroup implements IShape{
         for (IShape child : children) {
             new Paste(pastedShapes, child).undo();
         }
-        ArrayList<IShape> clonedList = (ArrayList<IShape>) pastedShapes.clone();
-        ShapeGroup g = new ShapeGroup(clonedList);
-        MasterShapeList.masterShapeList.getShapeList().remove(g);
+        //ArrayList<IShape> clonedList = (ArrayList<IShape>) pastedShapes.clone();
+        ShapeGroup g = new ShapeGroup(pastedShapes);
+        pastedShapes.add(g);
+        //MasterShapeList.masterShapeList.getShapeList().remove(g);
     }
 }
 

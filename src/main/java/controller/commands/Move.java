@@ -4,16 +4,14 @@ import controller.commands.interfaces.ICommand;
 import controller.commands.interfaces.IUndoable;
 import view.Shapes.MasterShapeList;
 import view.Shapes.ShapeList;
-import view.gui.PaintCanvas;
 import view.Shapes.Shape;
 import view.interfaces.IShape;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Move implements ICommand, IUndoable {
     private int deltaX, deltaY;
-    private IShape shape;
+    private final IShape shape;
     private final ShapeList movedShapes = new ShapeList();
     private final ArrayList<IShape> clipBoard = MasterShapeList.clipBoard.getShapeList();
 
