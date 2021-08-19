@@ -14,7 +14,6 @@ public class SelectCommand implements ICommand {
     private final Point pressedPoint;
     private final Point releasedPoint;
     private final PaintCanvas paintCanvas;
-    private int selectedCount = 0;
     private final ArrayList<IShape> masterList = MasterShapeList.masterShapeList.getShapeList();
 
     public  SelectCommand(Point PressedPoint, Point ReleasedPoint, PaintCanvas PaintCanvas) {

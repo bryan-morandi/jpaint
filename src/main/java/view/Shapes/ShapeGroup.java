@@ -1,5 +1,6 @@
 package view.Shapes;
 
+import controller.commands.CommandHistory;
 import controller.commands.Paste;
 import model.ShapeShadingType;
 import model.ShapeType;
