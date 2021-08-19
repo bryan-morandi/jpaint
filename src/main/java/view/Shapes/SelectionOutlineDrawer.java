@@ -25,8 +25,4 @@ public class SelectionOutlineDrawer {
         }
         return shape;
     }
-
-    public IShape getOriginalShape() {
-        return shape;
-    }
 }

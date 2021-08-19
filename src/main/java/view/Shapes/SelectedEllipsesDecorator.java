@@ -3,7 +3,6 @@ package view.Shapes;
 import controller.commands.Move;
 import model.ShapeShadingType;
 import model.ShapeType;
-import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
@@ -18,7 +17,6 @@ public class SelectedEllipsesDecorator extends SelectedShapeDecorator {
 
     @Override
     public void draw(Graphics2D g) {
-        //decoratedSelectedShape.draw(g);
         setEllipsesBorder(decoratedSelectedShape, g);
     }
 
@@ -115,7 +113,7 @@ public class SelectedEllipsesDecorator extends SelectedShapeDecorator {
 
     @Override
     public void moveShape(int deltaX, int deltaY) {
-        Move move = new Move(deltaX, deltaY, this);
+        new Move(deltaX, deltaY, this);
     }
 
     @Override

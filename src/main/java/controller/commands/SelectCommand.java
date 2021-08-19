@@ -2,7 +2,6 @@ package controller.commands;
 
 import controller.commands.interfaces.ICommand;
 import view.Shapes.BoundingBox;
-import view.Shapes.DetectCollision;
 import view.Shapes.MasterShapeList;
 import view.gui.PaintCanvas;
 import view.interfaces.IShape;

@@ -4,7 +4,6 @@ import controller.commands.Move;
 import controller.commands.Paste;
 import model.ShapeShadingType;
 import model.ShapeType;
-import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;

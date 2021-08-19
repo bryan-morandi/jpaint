@@ -10,7 +10,8 @@ import view.interfaces.IShape;
 import java.util.ArrayList;
 
 public class Move implements ICommand, IUndoable {
-    private int deltaX, deltaY;
+    private final int deltaX;
+    private final int deltaY;
     private final IShape shape;
     private final ShapeList movedShapes = new ShapeList();
     private final ArrayList<IShape> clipBoard = MasterShapeList.clipBoard.getShapeList();

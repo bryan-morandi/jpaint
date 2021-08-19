@@ -26,10 +26,7 @@ public class UngroupCommand implements ICommand, IUndoable {
             if (shape.getSelected()  ) {
                 childList.addAll(((ShapeGroup) shape).getChildren());
                 tempList.add(shape);
-                //((ShapeGroup) shape).unGroup();
-                //masterList.remove(shape);
             }
-            //masterList.addAll(tempList);
         }
         groupList.removeAll(tempList);
         for (IShape shape: childList) {

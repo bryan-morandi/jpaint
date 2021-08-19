@@ -3,7 +3,6 @@ package view.Shapes;
 import controller.commands.Move;
 import model.ShapeShadingType;
 import model.ShapeType;
-import view.gui.PaintCanvas;
 import view.interfaces.IShape;
 
 import java.awt.*;
@@ -18,7 +17,6 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
 
     @Override
     public void draw(Graphics2D g) {
-        //decoratedSelectedShape.draw(g);
         setRectangleBorder(decoratedSelectedShape, g);
     }
 
@@ -111,12 +109,10 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
     public void selectShape(BoundingBox boundingBox) { }
 
     @Override
-    public void copyShape() {};
+    public void copyShape() {}
 
     @Override
-    public void moveShape(int deltaX, int deltaY) {
-        Move move = new Move(deltaX, deltaY, this);
-    }
+    public void moveShape(int deltaX, int deltaY) { new Move(deltaX, deltaY, this); }
 
     @Override
     public void undoMove(int deltaX, int deltaY) {}
