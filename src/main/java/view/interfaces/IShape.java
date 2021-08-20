@@ -1,12 +1,8 @@
 package view.interfaces;
 
-import controller.commands.Move;
 import model.ShapeShadingType;
 import model.ShapeType;
 import view.Shapes.BoundingBox;
-import view.Shapes.Shape;
-import view.gui.PaintCanvas;
-
 import java.awt.*;
 import java.util.ArrayList;
 

@@ -125,7 +125,4 @@ public class SelectedEllipsesDecorator extends SelectedShapeDecorator {
     @Override
     public void undoPaste(ArrayList<IShape> pastedShapes) { }
 
-
-
-
 }

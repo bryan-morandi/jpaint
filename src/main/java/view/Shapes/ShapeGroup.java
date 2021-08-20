@@ -255,5 +255,6 @@ public class ShapeGroup implements IShape{
         ShapeGroup g = new ShapeGroup(pastedShapes);
         pastedShapes.add(g);
     }
+
 }
 

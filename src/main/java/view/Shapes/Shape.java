@@ -142,12 +142,10 @@ public class Shape implements IShape {
     @Override
     public void pasteShape(ArrayList<IShape> pastedShapes) {
         new Paste(pastedShapes, this).run();
-        //MasterShapeList.masterShapeList.getShapeList().addAll(pastedShapes);
     }
 
     @Override
     public void undoPaste(ArrayList<IShape> pastedShapes) {
         new Paste(pastedShapes,this).undo();
-        //MasterShapeList.masterShapeList.getShapeList().removeAll(pastedShapes);
     }
 }

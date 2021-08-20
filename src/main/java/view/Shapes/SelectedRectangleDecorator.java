@@ -122,4 +122,5 @@ public class SelectedRectangleDecorator extends SelectedShapeDecorator {
 
     @Override
     public void undoPaste(ArrayList<IShape> pastedShapes) { }
+
 }
